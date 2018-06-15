@@ -60,7 +60,7 @@ d3.selection.prototype.ever_used = function init(options) {
         const numbers = [...Array(100).keys()]
         const trueVals = numbers.map(d => {
           let state = null
-          if (d < (data.percent - 1)) state = 'true'
+          if (d < (data.percent)) state = 'true'
           else state = 'false'
           return {number: d, state: state}
         })
