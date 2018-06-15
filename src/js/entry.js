@@ -2,6 +2,7 @@
 import debounce from 'lodash.debounce';
 import isMobile from './utils/is-mobile';
 import graphic from './graphic';
+import everUsed from './ever-used'
 
 const $body = d3.select('body');
 let previousWidth = 0;
@@ -23,6 +24,7 @@ function init() {
 	window.addEventListener('resize', debounce(resize, 150));
 	// kick off graphic code
 	graphic.init();
+	everUsed.init()
 }
 
 init();
