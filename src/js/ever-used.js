@@ -1,6 +1,12 @@
-// D3 is included by globally by default
+import './pudding-chart/ever-used-template'
 
+// data
 let data = null
+
+// selections
+const $everUsed = d3.selectAll('.container-ever_used')
+
+
 
 const fullNames = [{
   short: 'CONDOM',
@@ -57,10 +63,23 @@ function cleanData(arr){
   })
 }
 
+function setupChart(){
+  const $sel = $everUsed
+  const charts = $sel
+    .selectAll('.chart')
+    .data(data)
+    .enter()
+    .append('div.chart')
+    .ever_used()
+
+    console.log({$everUsed})
+}
+
 function init() {
 	d3.loadData('assets/data/everused.csv', (err, response) => {
     data = cleanData(response[0])
-    console.log({data})
+      .sort((a, b) => d3.descending(a.percent, b.percent))
+    setupChart()
   })
 }
 

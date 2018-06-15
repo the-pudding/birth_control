@@ -1,0 +1,37 @@
+.ever_used
+  .container
+    display flex
+    flex-wrap wrap
+    max-width $column-width
+    margin 0 auto
+    .chart
+      display flex
+      flex-direction column
+      align-items: center
+      margin 1rem
+      width 120px
+
+      .title
+        text-align center
+        set-type-size('small', true)
+        font-weight 600
+        text-transform capitalize
+
+      .sub
+        set-type-size('x-small', true)
+
+
+      .blocks
+        width 70px
+        height 70px
+        display flex
+        flex-wrap wrap-reverse
+
+        .data-block
+          width 5px
+          height 5px
+          margin 1px
+          &-true
+            background-color $primary
+          &-false
+            background-color $gray-lightest
