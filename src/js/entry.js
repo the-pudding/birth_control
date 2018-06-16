@@ -2,7 +2,7 @@
 import debounce from 'lodash.debounce';
 import isMobile from './utils/is-mobile';
 import graphic from './graphic';
-import everUsed from './ever-used'
+import everUsed from './everUsed'
 
 const $body = d3.select('body');
 let previousWidth = 0;

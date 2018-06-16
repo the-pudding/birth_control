@@ -1,4 +1,4 @@
-import './pudding-chart/ever-used-template'
+import './pudding-chart/everUsed-template'
 
 // data
 let data = null
