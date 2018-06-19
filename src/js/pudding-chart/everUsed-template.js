@@ -81,8 +81,6 @@ d3.selection.prototype.ever_used = function init(options) {
           .text(`${data.percent}%`)
           .classed('tk-atlas', true)
 
-
-        console.log({trueVals})
 				return Chart;
 			},
 			// get / set data
@@ -101,6 +99,6 @@ d3.selection.prototype.ever_used = function init(options) {
 
 	// create charts
 	const charts = this.nodes().map(createChart);
-  console.log({charts})
+
 	return charts.length > 1 ? charts : charts.pop();
 };

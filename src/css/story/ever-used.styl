@@ -127,3 +127,51 @@
               stroke $gray-lightest
               stroke-width 1px
               stroke-dasharray 5px 5px
+
+.overTime
+  max-width $column-width
+  margin 0 auto
+
+  .container-over_time
+
+    .chart
+      width 150px
+      height 125px
+      margin 1rem 0
+
+      .title
+        font-family Atlas Grotesk, sans-serif
+        margin-bottom 0.5rem
+
+      .g-axis
+        .domain
+          display none
+        .tick
+          line
+            stroke $gray-lightest
+            stroke-width 1px
+            stroke-dasharray 5px 5px
+          text
+            fill $gray-dark
+
+          &:first-of-type
+            text
+              display none
+
+        .axis-x
+          text
+            set-type-size('x-small', true)
+            font-family Atlas Grotesk, sans-serif
+            text-transform uppercase
+            fill $gray
+
+
+      .g-vis
+        .area
+          fill $primary
+          opacity 0.5
+
+        .line
+          fill none
+          stroke-width 2px
+          stroke $primary

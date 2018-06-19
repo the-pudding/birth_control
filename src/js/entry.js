@@ -4,6 +4,7 @@ import isMobile from './utils/is-mobile';
 import graphic from './graphic';
 import everUsed from './everUsed'
 import firstTime from './firstTime'
+import overTime from './overTime'
 
 const $body = d3.select('body');
 let previousWidth = 0;
@@ -28,6 +29,7 @@ function init() {
 	graphic.init();
 	everUsed.init()
 	firstTime.init()
+	overTime.init()
 }
 
 init();
