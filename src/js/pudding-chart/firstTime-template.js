@@ -84,6 +84,10 @@ d3.selection.prototype.firstTime = function init(options) {
           .x(d => scaleX(d.decade))
           .y(d => scaleY(d.percent))
 
+          const test = scaleY(5)
+          const test2 = scaleY(75)
+          console.log({test, test2})
+
         // x-axis
         const xAxis = $axis.append('g')
           .attr('transform', `translate(0, ${height - marginBottom - marginTop})`)
