@@ -71,8 +71,6 @@ function setupChart(){
     .enter()
     .append('div.chart')
     .ever_used()
-
-    console.log({$everUsed})
 }
 
 function init() {
