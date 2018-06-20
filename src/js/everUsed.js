@@ -6,8 +6,6 @@ let data = null
 // selections
 const $everUsed = d3.selectAll('.container-ever_used')
 
-
-
 const fullNames = [{
   short: 'CONDOM',
   full: 'condom'
