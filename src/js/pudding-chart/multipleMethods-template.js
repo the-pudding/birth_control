@@ -33,7 +33,7 @@ d3.selection.prototype.multipleMethods = function init(options) {
     // colors
     const low = '#DDB2C2'
     const mid = '#C169D4'
-    const high = '#A841EA'
+    const high = '#5E32FF'
 
 		// scales
 		const scaleX = d3.scaleLinear()
