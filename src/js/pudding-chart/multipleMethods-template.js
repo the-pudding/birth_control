@@ -21,7 +21,7 @@ d3.selection.prototype.multipleMethods = function init(options) {
 		const marginTop = 30;
 		const marginBottom = 10;
 		let marginLeft = 230
-		const marginRight = 10;
+		const marginRight = 15;
     const numBars = 10
     const numPadding = 10
     let barHeight = null
@@ -118,6 +118,22 @@ d3.selection.prototype.multipleMethods = function init(options) {
 			},
 			// update scales and render chart
 			render() {
+
+        // axis
+        $axis
+          .call(d3.axisTop(scaleX)
+            .ticks(narrow ? 3 : 5)
+            .tickSize(-height - 10)
+            .tickSizeOuter(0)
+            .tickFormat(function(d, i){
+              return i == 0
+              ? d + " users" : d
+            })
+            .tickPadding(10)
+          )
+          .attr('transform', `translate(5, -10)`)
+
+
 
         const fullNameMap = d3.map(fullNames, d => d.full)
 
