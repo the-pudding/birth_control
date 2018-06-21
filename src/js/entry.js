@@ -5,6 +5,7 @@ import graphic from './graphic';
 import everUsed from './everUsed'
 import firstTime from './firstTime'
 import overTime from './overTime'
+import multiple from './multipleMethods'
 
 const $body = d3.select('body');
 let previousWidth = 0;
@@ -45,6 +46,7 @@ function init() {
 	everUsed.init()
 	firstTime.init()
 	overTime.init()
+	multiple.init()
 }
 
 init();
