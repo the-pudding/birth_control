@@ -17,9 +17,10 @@ d3.selection.prototype.multipleMethods = function init(options) {
 		// dimension stuff
 		let width = 0;
 		let height = 0;
+    let narrow = false
 		const marginTop = 30;
 		const marginBottom = 10;
-		const marginLeft = 270;
+		let marginLeft = 230
 		const marginRight = 10;
     const numBars = 10
     const numPadding = 10
@@ -43,6 +44,7 @@ d3.selection.prototype.multipleMethods = function init(options) {
 		let $svg = null;
 		let $axis = null;
 		let $vis = null;
+    let $g = null
     let barGroups = null
 
 		// helper functions
@@ -57,10 +59,12 @@ d3.selection.prototype.multipleMethods = function init(options) {
 			// called once at start
 			init() {
 				$svg = $sel.append('svg.multipleMethods-chart');
-				const $g = $svg.append('g');
+				$g = $svg.append('g');
 
 				// offset chart for margins
 				$g.at('transform', `translate(${marginLeft}, ${marginTop})`);
+
+        console.log({$g})
 
 				// create axis
 				$axis = $g.append('g.g-axis');
@@ -81,8 +85,17 @@ d3.selection.prototype.multipleMethods = function init(options) {
 			// on resize, update new dimensions
 			resize() {
 				// defaults to grabbing dimensions from container element
+        let windowWidth = window.innerWidth
+
+        narrow = windowWidth < 500 ? true : false
+        marginLeft = narrow ? 50 : 270
+
+
         width = $sel.node().offsetWidth - marginLeft - marginRight;
         height = (barHeight * numBars) + (paddingHeight * numPadding)
+        console.log({narrow, marginLeft, width})
+
+        //if (width < 500) narrow = true
 
 				$svg.at({
 					width: width + marginLeft + marginRight,
@@ -96,6 +109,8 @@ d3.selection.prototype.multipleMethods = function init(options) {
         scaleColor
           .domain(["72 - 87%", "88 - 98%", ">99%"])
           .range([low, mid, high])
+
+        $g.at('transform', `translate(${marginLeft}, ${marginTop})`);
 
 				return Chart;
 			},
@@ -118,7 +133,7 @@ d3.selection.prototype.multipleMethods = function init(options) {
         const barsMerge = barsEnter.merge(bars)
           .attr('width', d => scaleX(d.uniqueR))
           .attr('height', barHeight)
-          .attr('transform', `translate(10, 0)`)
+          .attr('transform', `translate(5, 0)`)
 
         const labels = barGroups
           .selectAll('.g-label')

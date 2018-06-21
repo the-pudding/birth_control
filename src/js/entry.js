@@ -18,6 +18,7 @@ function resize() {
 		previousWidth = width;
 		graphic.resize();
 		firstTime.resize()
+		multiple.resize()
 	}
 }
 

@@ -5,6 +5,8 @@ let data = null
 // selections
 const $multiple = d3.selectAll('.multiple_methods')
 
+let charts = null
+
 const fullNames = [{
   short: '3',
   full: 'The Pill',
@@ -73,13 +75,16 @@ function setupChart(){
   console.log({comboData})
 
   const $sel = $multiple
-  const charts = $sel
+  charts = $sel
     .selectAll('.graphic')
     .datum([fullData, fullNames])
     .multipleMethods()
 }
 
-function resize() {}
+function resize() {
+  charts.resize()
+  charts.render()
+}
 
 function init() {
 	d3.loadData('assets/data/multipleMethods.csv', (err, response) => {
