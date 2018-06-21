@@ -10,8 +10,8 @@
 d3.selection.prototype.multipleMethods = function init(options) {
 	function createChart(el) {
 		const $sel = d3.select(el);
-		let data = $sel.datum();
-    console.log({data})
+		let data = $sel.datum()[0];
+    const fullNames = $sel.datum()[1]
 
     let nestedData = null
 		// dimension stuff
@@ -19,12 +19,15 @@ d3.selection.prototype.multipleMethods = function init(options) {
 		let height = 0;
 		const marginTop = 30;
 		const marginBottom = 10;
-		const marginLeft = 230;
+		const marginLeft = 270;
 		const marginRight = 10;
     const numBars = 10
     const numPadding = 10
     const barHeight = 15
     const paddingHeight = 15
+    const textPaddingSide = 6
+    const textPaddingTop = 3
+    const fontSize = 12
 
     // colors
     const low = '#DDB2C2'
@@ -43,6 +46,12 @@ d3.selection.prototype.multipleMethods = function init(options) {
     let barGroups = null
 
 		// helper functions
+    function setEffectivenessLevel(failure){
+      const eff = 100 - failure
+      if (eff >= 99) return ">99%"
+      else if (eff < 99 && eff >= 88) return "88 - 98%"
+      else if (eff < 88) return "72 - 87%"
+    }
 
 		const Chart = {
 			// called once at start
@@ -75,8 +84,6 @@ d3.selection.prototype.multipleMethods = function init(options) {
         width = $sel.node().offsetWidth - marginLeft - marginRight;
         height = (barHeight * numBars) + (paddingHeight * numPadding)
 
-        console.log({height})
-
 				$svg.at({
 					width: width + marginLeft + marginRight,
 					height: height + marginTop + marginBottom
@@ -94,6 +101,8 @@ d3.selection.prototype.multipleMethods = function init(options) {
 			},
 			// update scales and render chart
 			render() {
+
+        const fullNameMap = d3.map(fullNames, d => d.full)
 
         const bars =  barGroups
           .selectAll('.bar')
@@ -113,52 +122,79 @@ d3.selection.prototype.multipleMethods = function init(options) {
 
         const labels = barGroups
           .selectAll('.g-label')
-          .data(d => [d])
+          .data(d => d.annotation.values)
 
         const labelsEnter = labels
           .enter()
           .append('g')
 
-
         labels.exit().remove
 
         const labelsMerge = labelsEnter.merge(labels)
           .attr('class', 'g-label')
-          .attr('text-anchor', 'end')
+          //.attr('text-anchor', 'end')
+
+
+        labelsMerge
+          .append('text')
+          .attr('class', d => {
+            if (d == "+") return `label-text label-text-plus tk-atlas`
+            else return `label-text tk-atlas`})
+          .text(d => d)
+          .attr('transform', `translate(${textPaddingSide}, ${(textPaddingTop)})`)
+          .style('text-transform', 'uppercase')
+          .style('font-size', fontSize)
+          .style('font-weight', 600)
           .attr('alignment-baseline', 'hanging')
 
         labelsMerge
-          .append('text')
-          .attr('class', 'label label-1')
-          .text(d => d.name1)
+          .append('rect')
+          .attr('class', 'label-rect')
+          .attr('width', function(d){
+            const parent = d3.select(this.parentNode)
+            const text = parent.selectAll('.label-text')
+            const bbox = text.node().getBBox()
+            return bbox.width + (textPaddingSide * 2)
+          })
+          .attr('height', (textPaddingTop * 2) + fontSize)
+          .style('fill', d => {
+            if (d == "+") return 'none'
+            else {
+              const failure = fullNameMap.get(d).failure
+              const level = setEffectivenessLevel(failure)
+              return `${scaleColor(level)}`
+            }
+          })
+          .attr('rx', 5)
+          .attr('ry', 5)
+          .lower()
 
-        labelsMerge
-          .append('text')
-          .attr('class', 'label label-symbol')
-          .text(' + ')
+        $vis.selectAll('.g-label')
+          .attr('transform', function(d, i){
+            const grandParent = d3.select(this.parentNode.parentNode)
+            const relatives = grandParent.selectAll('.g-label')
+              .nodes()
+              .map((d, i) => {
+                const allLabels = barGroups.selectAll('.g-label').nodes()
 
-        labelsMerge
-          .append('text')
-          .attr('class', 'label label-2')
-          .text(d => d.name2)
-        // const labelsMerge = labelsEnter.merge(labels)
-        //   //.text(d => `${d.name1} + ${d.name2}`)
-        //   .append('tspan')
-        //   .text(d => d.name1)
-        //   .attr('dy', barHeight)
-        //   .attr('background-color', 'red')
-        //   .append('tspan')
-        //   .text('+')
-        //   .append('tspan')
-        //   .text(d => d.name2)
-        // .attr('text-anchor', 'end')
-        // .attr('alignment-baseline', 'hanging')
+                const remainder = i % 3
 
-      // const t = barGroups.selectAll('tspan')
-      //
-      // console.log({t})
-      // t
-      //   .attr('transform', d => `translate(0, ${barHeight}px)`)
+                const bbox = d.getBBox()
+                const self = bbox.width + textPaddingSide
+
+                let x = null
+                if (remainder == 0) {
+                  return x = allLabels[i + 1].getBBox().width + allLabels[i + 2].getBBox().width + self
+                }
+                if (remainder == 1) {
+                  return x = allLabels[i + 1].getBBox().width + self
+                }
+                else x = self
+                return x
+              })
+
+            return `translate(${-relatives[i]}, ${-textPaddingTop})`
+          })
 
         barGroups
           .attr('transform', (d, i) => `translate(0, ${i * (barHeight + paddingHeight)})`)

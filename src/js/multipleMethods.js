@@ -43,6 +43,7 @@ const fullNames = [{
   failure: 10
 }]
 
+
 const fullNameMap = d3.map(fullNames, d => d.short)
 
 function cleanData(arr){
@@ -55,16 +56,26 @@ function cleanData(arr){
       name2: fullNameMap.get(d.m2).full,
       uniqueR: +d.uniqueR,
       effectiveness1: 100 - fullNameMap.get(d.m1).failure,
-      effectiveness2: 100 - fullNameMap.get(d.m2).failure 
+      effectiveness2: 100 - fullNameMap.get(d.m2).failure,
     }
   })
 }
 
 function setupChart(){
+  const fullData = data.map(d => {
+    return {
+      ...d,
+      annotation: {values: [d.name1, "+", d.name2]},
+    }
+  })
+
+  const comboData = [fullData, fullNames]
+  console.log({comboData})
+
   const $sel = $multiple
   const charts = $sel
     .selectAll('.graphic')
-    .datum(data)
+    .datum([fullData, fullNames])
     .multipleMethods()
 }
 
