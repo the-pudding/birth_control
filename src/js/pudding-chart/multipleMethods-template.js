@@ -24,8 +24,8 @@ d3.selection.prototype.multipleMethods = function init(options) {
 		const marginRight = 10;
     const numBars = 10
     const numPadding = 10
-    const barHeight = 15
-    const paddingHeight = 15
+    let barHeight = null
+    let paddingHeight = null
     const textPaddingSide = 6
     const textPaddingTop = 3
     const fontSize = 12
@@ -88,7 +88,9 @@ d3.selection.prototype.multipleMethods = function init(options) {
         let windowWidth = window.innerWidth
 
         narrow = windowWidth < 500 ? true : false
-        marginLeft = narrow ? 50 : 270
+        marginLeft = narrow ? 150 : 270
+        barHeight = narrow ? 20 : 15
+        paddingHeight = narrow ? (fontSize * 2) + (textPaddingTop * 2) : 15
 
 
         width = $sel.node().offsetWidth - marginLeft - marginRight;
@@ -147,10 +149,11 @@ d3.selection.prototype.multipleMethods = function init(options) {
 
         const labelsMerge = labelsEnter.merge(labels)
           .attr('class', 'g-label')
+          .classed('narrow', narrow ? true : false)
           //.attr('text-anchor', 'end')
 
 
-        labelsMerge
+        labelsEnter
           .append('text')
           .attr('class', d => {
             if (d == "+") return `label-text label-text-plus tk-atlas`
@@ -162,7 +165,7 @@ d3.selection.prototype.multipleMethods = function init(options) {
           .style('font-weight', 600)
           .attr('alignment-baseline', 'hanging')
 
-        labelsMerge
+        labelsEnter
           .append('rect')
           .attr('class', 'label-rect')
           .attr('width', function(d){
@@ -184,31 +187,42 @@ d3.selection.prototype.multipleMethods = function init(options) {
           .attr('ry', 5)
           .lower()
 
-        $vis.selectAll('.g-label')
+        const allGroups = $vis.selectAll('.g-label').nodes()
+
+        const allBBox = allGroups
+          .map((d, i) => {
+            const bboxWidth = d.getBBox().width
+            const self = bboxWidth + textPaddingSide
+            return {bboxWidth: bboxWidth, self: self}
+          })
+
+          console.log({allBBox})
+
+
+        const gLabels = $vis.selectAll('.g-label')
           .attr('transform', function(d, i){
-            const grandParent = d3.select(this.parentNode.parentNode)
-            const relatives = grandParent.selectAll('.g-label')
-              .nodes()
-              .map((d, i) => {
-                const allLabels = barGroups.selectAll('.g-label').nodes()
+            const remainder = i % 3
+            const self = allBBox[i].self
+            let horiz = null
+            if (remainder === 0) {
+              const second = allBBox[i + 1].bboxWidth
+              const third = allBBox[i + 2].bboxWidth
 
-                const remainder = i % 3
+              horiz = second + third + self
+            }
+            else if (remainder === 1) {
+              horiz = allBBox[i + 1].bboxWidth + self
+            }
+            else if(remainder === 2) horiz = self
 
-                const bbox = d.getBBox()
-                const self = bbox.width + textPaddingSide
+            if (narrow == false) return `translate(${-horiz}, ${-textPaddingTop})`
+            else if (narrow == true) {
+              let y = null
+              if (remainder === 0 || remainder === 1) y = 0
+              else if (remainder === 2) y = (textPaddingTop * 2) + fontSize
 
-                let x = null
-                if (remainder == 0) {
-                  return x = allLabels[i + 1].getBBox().width + allLabels[i + 2].getBBox().width + self
-                }
-                if (remainder == 1) {
-                  return x = allLabels[i + 1].getBBox().width + self
-                }
-                else x = self
-                return x
-              })
-
-            return `translate(${-relatives[i]}, ${-textPaddingTop})`
+              return `translate(${-self}, ${y})`
+            }
           })
 
         barGroups
