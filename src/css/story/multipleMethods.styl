@@ -2,6 +2,55 @@
   max-width $column-width
   margin 0 auto
 
+  .legend
+    display flex
+    flex-wrap row
+    align-items: baseline;
+    margin-bottom 2rem
+
+    &-title
+      margin 0 0.5rem 0 1rem
+      text-transform uppercase
+      font-family Atlas Grotesk, sans-serif
+      set-type-size('x-small', true)
+      width 180px
+
+    &-items
+      display flex
+      flex-wrap wrap
+      align-items: center
+      justify-content: center;
+
+      .legend-item
+        display flex
+        align-items: center
+        justify-content: center
+        //width 75px
+        //height 20px
+        margin 0.25rem
+        padding 0.1rem 0.4rem
+        border-radius: 5px
+
+        &-1
+          background-color: $quaternary
+
+        &-2
+          background-color: $tertiary
+
+        &-3
+          background-color: $secondary
+
+        &_text
+          text-align: center
+          //background-color: $tertiary
+          //padding 0.2rem 0.2rem
+          margin 0
+          set-type-size('x-small', true)
+          font-weight 600
+          font-family Atlas Grotesk, sans-serif
+          color $white
+
+
   .multipleMethods-chart
 
     .g-vis
