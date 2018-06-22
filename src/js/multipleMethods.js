@@ -71,9 +71,6 @@ function setupChart(){
     }
   })
 
-  const comboData = [fullData, fullNames]
-  console.log({comboData})
-
   const $sel = $multiple
   charts = $sel
     .selectAll('.graphic')

@@ -6,6 +6,7 @@ import everUsed from './everUsed'
 import firstTime from './firstTime'
 import overTime from './overTime'
 import multiple from './multipleMethods'
+import sideEffects from './sideEffects'
 
 const $body = d3.select('body');
 let previousWidth = 0;
@@ -48,6 +49,7 @@ function init() {
 	firstTime.init()
 	overTime.init()
 	multiple.init()
+	sideEffects.init()
 }
 
 init();
