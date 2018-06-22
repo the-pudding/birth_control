@@ -57,6 +57,21 @@ d3.selection.prototype.sideEffects = function init(options) {
 		const Chart = {
 			// called once at start
 			init() {
+        const titleGroup = $sel.append('div.chart-legend')
+        titleGroup.append('text')
+          .text(data.key)
+          .attr('class', 'method-type')
+
+        titleGroup.append('text')
+          .text(`•`)
+          .attr('class', 'bullet')
+
+        const thouFormat = d3.format(',')
+
+        titleGroup.append('text')
+          .text(`${thouFormat(data.values[0].total)} Respondents`)
+          .attr('class', 'method-total')
+
 				$svg = $sel.append('svg.multipleMethods-chart');
 				$g = $svg.append('g');
 
@@ -75,6 +90,22 @@ d3.selection.prototype.sideEffects = function init(options) {
           .enter()
           .append('g')
           .attr('class', 'g-bar')
+          .classed('sideEffect', d => {
+            const se = d.label.includes('side')
+            return se
+          })
+          .classed('bleeding', d => {
+            const blood = d.label.includes('bleeding')
+            return blood
+          })
+          .classed('weight', d => {
+            const weight = d.label.includes('weight')
+            return weight
+          })
+          .classed('pain', d => {
+            const pain = d.label.includes('pain')
+            return pain
+          })
 
 				Chart.resize();
 				Chart.render();
@@ -127,12 +158,15 @@ d3.selection.prototype.sideEffects = function init(options) {
           .append('rect')
           .attr('class', 'bar')
 
+
+
         bars.exit().remove
 
         const barsMerge = barsEnter.merge(bars)
           .attr('width', d => scaleX(d.percent))
           .attr('height', barHeight)
           .attr('transform', `translate(5, 0)`)
+
 
         const labels = barGroups
           .selectAll('.g-label')
@@ -155,7 +189,7 @@ d3.selection.prototype.sideEffects = function init(options) {
           .attr('class', d => {
               return `label-text-bg tk-atlas`})
           .text(d => d.label)
-          .attr('transform', `translate(${textPaddingSide}, ${(textPaddingTop)})`)
+          .attr('transform', `translate(${textPaddingSide}, 0)`)
           .style('text-transform', 'uppercase')
           .style('font-size', fontSize)
           //.style('font-weight', 600)

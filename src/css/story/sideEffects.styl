@@ -1,5 +1,31 @@
 .sideEffects
 
+  &-text
+
+    .sideEffects
+      background-color $primary
+      padding 0.25rem
+      border-radius 5px
+      color $white
+
+    .weightGain
+      background-color $primary
+      padding 0.25rem
+      border-radius 5px
+      color $white
+
+    .pain
+      background-color $secondary
+      padding 0.25rem
+      border-radius 5px
+      color $white
+
+    .bleeding
+      background-color darken($quaternary, 5)
+      padding 0.25rem
+      border-radius 5px
+      color $white
+
   .graphic
     margin 0 auto
     max-width 50rem
@@ -10,8 +36,26 @@
       justify-content: space-between;
       margin 1rem
 
+      .chart-legend
+        margin-bottom 0.5rem
+        .method-type
+          font-family Atlas Grotesk, sans-serif
+          font-weight 600
+          text-transform uppercase
+
+        .method-total
+          font-family Atlas Grotesk, sans-serif
+          set-type-size('x-small', true)
+          color $gray
+          text-transform: uppercase;
+
+        .bullet
+          color $primary
+          margin 0 0.5rem
+
       .chart
         width 350px
+        margin-bottom 1rem
         +mq('bp-4')
           width 375px
 
@@ -21,6 +65,36 @@
               fill none
               stroke $white
               stroke-width 5px
+
+          .g-bar
+            .bar
+              fill $dark
+            &.pain
+              .bar
+                fill $secondary !important
+              .label-text
+                fill $secondary
+                font-weight 600
+            &.sideEffect
+              .bar
+                fill $primary !important
+              .label-text
+                fill $primary
+                font-weight 600
+            &.weight
+              .bar
+                fill $primary !important
+              .label-text
+                fill $primary
+                font-weight 600
+            &.bleeding
+              .bar
+                fill $quaternary !important
+              .label-text
+                fill darken($quaternary, 10)
+                font-weight 600
+
+
         .g-axis
           .domain
             display none
