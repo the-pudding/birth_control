@@ -3,7 +3,7 @@ import './pudding-chart/sideEffects-template'
 let data = null
 
 // selections
-const $sideEffects = d3.selectAll('.sideEffects')
+const $sideEffects = d3.selectAll('.graphic-sideEffects')
 
 let charts = null
 
@@ -27,7 +27,7 @@ const generalReasons = [{
   label: 'method failed'
 }, {
   number: 12,
-  label: 'decreased sexual pleasure'
+  label: 'less sexual pleasure'
 }, {
   number: 14,
   label: 'changes to menstrual cycle'
@@ -154,7 +154,7 @@ function setupChart(){
     }
   })
 
-  const $sel = $sideEffects
+  const $sel = d3.select(this)
   const container = $sel.selectAll('.container-sideEffects')
 
   const type = container.at('data-type')
@@ -163,6 +163,8 @@ function setupChart(){
   const nested = d3.nest()
     .key(d => d.stopMethod)
     .entries(typeData)
+
+  console.log({typeData, type})
 
   const charts = container
     .selectAll('.chart')
@@ -180,7 +182,7 @@ function resize() {
 function init() {
 	d3.loadData('assets/data/sideEffects.csv', (err, response) => {
     data = cleanData(response[0])
-    setupChart()
+    $sideEffects.each(setupChart)
   })
 }
 export default { init, resize };

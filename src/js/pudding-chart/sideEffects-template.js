@@ -20,11 +20,11 @@ d3.selection.prototype.sideEffects = function init(options) {
 		const marginTop = 30;
 		const marginBottom = 5;
 		let marginLeft = 0
-		const marginRight = 30;
+		const marginRight = 50;
     const numBars = 5
     const numPadding = 5
-    let barHeight = 15
-    let paddingHeight = 15
+    let barHeight = 10
+    let paddingHeight = 8
     const textPaddingSide = 6
     const textPaddingTop = 3
     const fontSize = 12
@@ -158,7 +158,7 @@ d3.selection.prototype.sideEffects = function init(options) {
           .attr('transform', `translate(${textPaddingSide}, ${(textPaddingTop)})`)
           .style('text-transform', 'uppercase')
           .style('font-size', fontSize)
-          .style('font-weight', 600)
+          //.style('font-weight', 600)
           .attr('alignment-baseline', 'hanging')
           //.style('fill', '#ffffff')
           //.style('stroke', `4px solid #ffffff`)
@@ -168,11 +168,14 @@ d3.selection.prototype.sideEffects = function init(options) {
           .attr('class', d => {
               return `label-text tk-atlas`})
           .text(d => d.label)
-          .attr('transform', `translate(${textPaddingSide}, ${(textPaddingTop)})`)
+          .attr('transform', `translate(${textPaddingSide}, 0)`)
           .style('text-transform', 'uppercase')
           .style('font-size', fontSize)
-          .style('font-weight', 600)
+          //.style('font-weight', 600)
           .attr('alignment-baseline', 'hanging')
+
+        labelsEnter
+          .attr('transform', d => `translate(${scaleX(d.percent) + textPaddingSide}, 0)`)
 
         // labelsEnter
         //   .append('rect')

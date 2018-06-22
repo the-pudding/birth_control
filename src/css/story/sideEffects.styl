@@ -7,8 +7,30 @@
     .container
       display flex
       flex-wrap wrap
-      justify-content: space-around;
+      justify-content: space-between;
       margin 1rem
 
       .chart
-        max-width 350px
+        width 350px
+        +mq('bp-4')
+          width 375px
+
+        .g-vis
+          .g-label
+            .label-text-bg
+              fill none
+              stroke $white
+              stroke-width 5px
+        .g-axis
+          .domain
+            display none
+          .tick
+            line
+              stroke $gray-light
+              stroke-width 1px
+              stroke-dasharray 5px 5px
+            text
+              set-type-size('xx-small', true)
+              font-family Atlas Grotesk, sans-serif
+              fill $gray
+              text-transform uppercase
