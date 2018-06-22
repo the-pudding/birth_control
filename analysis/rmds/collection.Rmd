@@ -57,6 +57,7 @@ library(tidyverse)
 library(SAScii)
 library(purrr)
 library(rlang)
+library(forcats)
 
 ## For graphing
 library(igraph)
@@ -367,7 +368,10 @@ firstTimeYear <- allData %>%
   na.omit() %>% 
   mutate(percent = round(percent, 1)) %>% 
   rename(method = FIRSMETH1) %>% 
-  select(method, decade, percent)
+  select(method, decade, percent) %>% 
+  ungroup() %>% 
+  group_by(method) %>% 
+  arrange(factor(decade, levels = c("70's", "80's", "90's", "00's", "10's")), decade)
 
 ## Export data to csv for graphing
 write.csv(firstTimeYear, "../../src/assets/data/firstTime.csv", row.names = FALSE)
@@ -734,6 +738,18 @@ commonCombo <- allNetworkData %>%
   ungroup() %>% 
   mutate(row = row_number())
 
+combo2 <- allNetworkData %>% 
+  group_by(m1 = pmin(m_a, m_b), m2 = pmax(m_a, m_b)) %>% 
+  summarise(uniqueR = n_distinct(CASEID)) %>% 
+  arrange(desc(uniqueR)) %>% 
+  ungroup() %>% 
+  mutate(row = row_number()) %>% 
+  filter(row <= 10) %>% 
+  select(-row)
+
+write.csv(combo2, "../../src/assets/data/multipleMethods.csv", row.names = FALSE)
+
+
 ggplot(commonCombo, aes(x = row, y = uniqueR)) + geom_bar(stat = "identity") + coord_flip()
 
 ggplot(commonCombo, aes(m_a, m_b)) +
@@ -791,9 +807,10 @@ So most people stopped taking a certain type of contraceptive because of (primar
 Looks like the question above is a spin-off of another question: why were users dissatisfied enough to stop using a particular method (if they answered other, or they had side effects, then the answered the question explored above). 
 
 ```{r}
+## Calculating percent of complaints out of total number of complaints
 whyDis <- allData %>% 
-  select(contains("REAS")) %>% 
-  gather(stopMethod, reason) %>% 
+  select(CASEID, contains("REAS")) %>% 
+  gather(stopMethod, reason, -CASEID) %>% 
   na.omit() %>% 
   # Remove last 2 characters from method names (the numbers) 
   mutate(stopMethod = str_sub(stopMethod, 1, str_length(stopMethod)-2)) %>% 
@@ -832,6 +849,102 @@ ggplot(whyDis, aes(x = reason, y = percent)) +
   theme(axis.text.x = element_text(angle = 90, hjust = 1))
 ```
 
+```{r}
+## Calculating percent of complaints out of total users that discontinued use
+whyDisUsers <- allData %>% 
+  select(CASEID, contains("REAS")) %>% 
+  gather(stopMethod, reason, -CASEID) %>% 
+  na.omit() %>% 
+  # Remove last 2 characters from method names (the numbers) 
+  mutate(stopMethod = str_sub(stopMethod, 1, str_length(stopMethod)-2)) %>% 
+  group_by(stopMethod) %>% 
+  mutate(total = n_distinct(CASEID)) %>% 
+  group_by(stopMethod, reason, total) %>% 
+  summarise(count = n()) %>% 
+  mutate(percent = (count / total) * 100) %>% 
+  arrange(desc(count)) %>% 
+  group_by(stopMethod, reason) %>% 
+  mutate(rank = row_number()) %>% 
+  filter(rank <= 5) %>% 
+  mutate(label = case_when(
+    reason == 1 ~ "too expensive",
+    reason == 2 ~ "insurance didn't cover it",
+    reason == 3 ~ "too difficult to use",
+    reason == 4 ~ "too messy",
+    reason == 5 ~ "partner did not like it",
+    reason == 6 ~ "you had side effects",
+    reason == 7 ~ "you were worried you might have side effects",
+    reason == 8 ~ "worried the method would not work",
+    reason == 9 ~ "method failed and you became pregnant",
+    reason == 10 ~ "the method did not protect against disease",
+    reason == 11 ~ "Doctor told you that you should not use method again",
+    reason == 12 ~ "method decreased sexual pleasure",
+    reason == 13 ~ "too difficult to obtain",
+    reason == 14 ~ "did not like changes to menstrual cycle",
+    reason == 15 ~ "other",
+    reason == 99 ~ "do not know"
+  )) %>% 
+  filter(reason < 25) %>% 
+  group_by(stopMethod) %>% 
+  arrange(desc(percent)) %>% 
+  mutate(rank = row_number()) %>% 
+  filter(rank <= 5) %>% 
+  select(stopMethod, reason, total, percent) %>%
+  mutate(percent = round(percent, 1)) %>% 
+  mutate(type = "general")
+
+ggplot(whyDis, aes(x = reason, y = percent)) + 
+  geom_bar(stat = "identity") + 
+  facet_wrap(~stopMethod) +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1))
+```
+
+```{r}
+# Import lookup table for values
+stop_reasons <- read.csv(here("raw_data", "stop_reasons.csv")) %>% 
+  mutate(method = toupper(method))
+
+whyStopUsers <- allData %>% 
+  select(CASEID, contains("STOP")) %>% 
+  gather(stopMethod, reason, -CASEID) %>% 
+  na.omit() %>% 
+  # Remove last character from method names (the number) 
+  mutate(stopMethod = str_sub(stopMethod, 1, str_length(stopMethod)-1)) %>% 
+  group_by(stopMethod) %>% 
+  mutate(total = n_distinct(CASEID)) %>% 
+  group_by(stopMethod, reason, total) %>% 
+  summarise(count = n()) %>% 
+  mutate(percent = (count / total) * 100) %>% 
+  arrange(desc(count)) %>% 
+  group_by(stopMethod, reason) %>% 
+  mutate(rank = row_number()) %>% 
+  filter(rank <= 5) %>% 
+  left_join(stop_reasons, by = c("stopMethod" = "method", "reason" = "value")) %>% 
+  filter(stopMethod != "METHSTOP1",
+         stopMethod != "METHSTOP2") %>% 
+  filter(reason < 25) %>% 
+  group_by(stopMethod) %>% 
+  arrange(desc(percent)) %>% 
+  mutate(rank = row_number()) %>% 
+  filter(rank <= 5) %>% 
+  select(stopMethod, reason, total, percent) %>%
+  mutate(percent = round(percent, 1)) %>%
+  mutate(type = "specific")
+
+userSideEffects <- bind_rows(whyDisUsers, whyStopUsers) %>% 
+  ungroup() %>% 
+  mutate(stopMethod = gsub("STOPPILL|REASPILL", "The Pill", stopMethod),
+        stopMethod =  gsub("STOPIUD|REASIUD", "IUD", stopMethod),
+         stopMethod = gsub("STOPCOND|REASCOND", "Condom", stopMethod),
+         stopMethod = gsub("STOPDEPO|REASDEPO", "Depo-Provera", stopMethod))
+
+write.csv(userSideEffects, "../../src/assets/data/sideEffects.csv", row.names = FALSE)
+
+ggplot(whyStop, aes(x = reason, y = percent)) + 
+  geom_bar(stat = "identity") + 
+  facet_wrap(~stopMethod) +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1))
+```
 
 ### changes with age
 Does birth control usage change with age? 
@@ -895,10 +1008,17 @@ totalAges2 <- methodAge %>%
   group_by(calcAge) %>% 
   summarise(total = sum(methodR))
 
+toRemove <- c(1, 98, 99, 21, 22, 23, 14, 15, 17, 13, 18, 24, 55)
+
 fullAge <- methodAge %>% 
   left_join(totalAges2, by = "calcAge") %>% 
   mutate(percent = (methodR / total) * 100) %>% 
-  filter(total > 1000)
+  filter(total > 1000) %>% 
+  # Filter out no method, refused, and don't know
+  filter(!method %in% toRemove) %>% 
+  filter(!is.na(calcAge))
+
+write.csv(fullAge, "../../src/assets/data/overTime.csv", row.names = FALSE)
   
 
 facetAge <- ggplot(fullAge, aes(x = calcAge, y = percent, group = method, color = method)) + geom_line() + geom_area() + facet_wrap(~method)
