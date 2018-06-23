@@ -14,3 +14,47 @@
     &.hiding
       .body
         transform translate(0, 20px)
+        transition 300ms
+
+      &:hover
+        .body
+          transform translate(0, 12px)
+          transition 300ms
+
+  &-info
+    width 50%
+    height 50%
+    top 0
+    left 0
+    transform translate(50%, 50%)
+    background-color: $secondary
+    visibility hidden
+
+    &.active
+      visibility: visible;
+
+  &-speech
+    width 150px
+    height 150px
+    position absolute
+    background-color: $secondary
+    border-radius .4em
+    bottom 100px
+    right 1.5%
+    visibility hidden
+
+    &.active
+      visibility visible
+
+    &:after
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      width: 0;
+      height: 0;
+      border: 20px solid transparent;
+      border-top-color: $secondary;
+      border-bottom: 0;
+      margin-left: -20px;
+      margin-bottom: -20px;
