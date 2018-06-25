@@ -69,14 +69,14 @@
       "cost": "Up to $1,300, but can be $0",
       "effectiveness": "99%",
       "how": "Both the hormonal and copper IUDs alter sperm movement to prevent pregnancy. Sperm avoid the copper or the hormones thicken the cervical mucus, making movement difficult for the sperm.",
-      "learn": "https://www.plannedparenthood.org/learn/birth-control/iud",
+      "learn": "https://www.plannedparenthood.org/learn/birth-control/iud"
     },
     "thermal": {
-      "definition": "Using the minor fluctuations in your daily body temperature, you can try to predict when your body will be fertile.",
+      "definition": "By combining daily temperature measurements, vaginal discharge observations, and the pattern of your monthly menstrual cycle, you can try to predict when you are most likely to be fertile.",
       "prescription": "no",
       "cost": "Up to $20 for supplies",
       "effectiveness": "76-88%",
-      "how": "Body temperature changes naturally throughout the menstrual cycle. By tracking your daily body temperature over the course of several months, you can begin to determine which days you are likely to be fertile.",
+      "how": "Since body temperature and the type of cervical mucus change slightly throughout the menstrual cycle, tracking them along with other information about your cycle",
       "learn": "https://www.plannedparenthood.org/learn/birth-control/fertility-awareness/whats-temperature-method-fams"
     },
     "standard": {

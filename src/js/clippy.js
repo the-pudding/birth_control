@@ -14,8 +14,26 @@ function handleClick(){
   const sel = d3.select(this)
   const name = sel.at('data-clippy').toLowerCase()
 
+  const details = copy[`${name}`]
+  console.log({details})
+
   info
     .classed('active', true)
+
+  info.select('.info-title')
+    .text(name)
+
+  info.select('.info-def')
+    .text(details.definition)
+
+  info.select('.info-prose-eff')
+    .text(`${details.effectiveness} effective at preventing pregnancy`)
+
+  info.select('.info-prose-how')
+    .text(details.how)
+
+  info.select('.link')
+    .attr('href', details.learn)
 
   clippy
     .classed('hiding', false)
@@ -38,8 +56,8 @@ function closeInfo(){
 
 function init() {
   d3.loadData('assets/data/methods.json', (err, response) => {
-    copy = response
-    console.log({response})
+    copy = response[0]
+    console.log({copy})
   })
 
 	const clickable = d3.selectAll('[data-clippy]')
