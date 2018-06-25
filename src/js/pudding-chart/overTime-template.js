@@ -41,6 +41,7 @@ d3.selection.prototype.over_time = function init(options) {
 		const Chart = {
 			// called once at start
 			init() {
+				$sel.at('data-clippy', data.key)
 				$method = $sel.append('div.title')
 
         $svg = $sel.append('svg.overTime-chart');

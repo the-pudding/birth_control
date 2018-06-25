@@ -162,6 +162,10 @@ d3.selection.prototype.multipleMethods = function init(options) {
         const labelsMerge = labelsEnter.merge(labels)
           .attr('class', 'g-label')
           .classed('narrow', narrow ? true : false)
+					.at('data-clippy', d => {
+						if (d == '+') return null
+						else return d
+				})
           //.attr('text-anchor', 'end')
 
 

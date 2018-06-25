@@ -113,6 +113,14 @@ d3.selection.prototype.firstTime = function init(options) {
           .enter()
           .append('g')
           .attr('class', 'groups-firstTime')
+					.at('data-clippy', d => {
+						let label = null
+						if (d.key == 3) label = "Condoms"
+						else if (d.key == 4) label = "The Pill"
+						else if (d.key == 8) label = "Depo-Provera"
+						else label = null
+						return label
+					})
 
         lineGroups
           .append('path')
