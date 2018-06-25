@@ -27,9 +27,12 @@ function setupChart(){
 function resize() {}
 
 function init() {
-	d3.loadData('assets/data/firstTime.csv', (err, response) => {
-    data = cleanData(response[0])
-    setupChart()
+	return new Promise ((resolve) => {
+      d3.loadData('assets/data/firstTime.csv', (err, response) => {
+        data = cleanData(response[0])
+        setupChart()
+        resolve()
+    })
   })
 }
 export default { init, resize };

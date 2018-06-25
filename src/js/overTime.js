@@ -89,9 +89,12 @@ function setupChart(){
 }
 
 function init() {
-	d3.loadData('assets/data/overTime.csv', (err, response) => {
-    data = cleanData(response[0])
-    setupChart()
+  return new Promise((resolve) => {
+    d3.loadData('assets/data/overTime.csv', (err, response) => {
+      data = cleanData(response[0])
+      setupChart()
+      resolve()
+    })
   })
 }
 

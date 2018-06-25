@@ -151,8 +151,6 @@ d3.selection.prototype.sideEffects = function init(options) {
           .selectAll('.bar')
           .data(d => [d])
 
-          console.log({barGroups, bars})
-
         const barsEnter = bars
           .enter()
           .append('rect')

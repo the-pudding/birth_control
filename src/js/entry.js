@@ -7,6 +7,7 @@ import firstTime from './firstTime'
 import overTime from './overTime'
 import multiple from './multipleMethods'
 import sideEffects from './sideEffects'
+import clippy from './clippy'
 
 const $body = d3.select('body');
 let previousWidth = 0;
@@ -44,12 +45,23 @@ function init() {
 	// setup header
 	setupStickyHeader();
 	// kick off graphic code
-	graphic.init();
-	everUsed.init()
-	firstTime.init()
-	overTime.init()
-	multiple.init()
-	sideEffects.init()
+		//graphic.init(),
+		const promises = [
+			everUsed.init(),
+			firstTime.init(),
+			overTime.init(),
+			multiple.init(),
+			sideEffects.init()
+		]
+
+		Promise.all(promises)
+			.then(() => {
+				clippy.init()
+			})
+			.catch(() => {
+				console.log("Caught an error")
+			})
+
 }
 
 init();

@@ -69,13 +69,19 @@ function setupChart(){
     .enter()
     .append('div.chart')
     .ever_used()
+
+    const test = d3.selectAll('[data-clippy]')
+    console.log({test})
 }
 
 function init() {
-	d3.loadData('assets/data/everused.csv', (err, response) => {
-    data = cleanData(response[0])
-      .sort((a, b) => d3.descending(a.percent, b.percent))
-    setupChart()
+	return new Promise((resolve) => {
+    d3.loadData('assets/data/everused.csv', (err, response) => {
+      data = cleanData(response[0])
+        .sort((a, b) => d3.descending(a.percent, b.percent))
+      setupChart()
+      resolve()
+    })
   })
 }
 

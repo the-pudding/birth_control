@@ -164,8 +164,6 @@ function setupChart(){
     .key(d => d.stopMethod)
     .entries(typeData)
 
-  console.log({typeData, type})
-
   const charts = container
     .selectAll('.chart')
     .data(nested)
@@ -180,9 +178,12 @@ function resize() {
 }
 
 function init() {
-	d3.loadData('assets/data/sideEffects.csv', (err, response) => {
-    data = cleanData(response[0])
-    $sideEffects.each(setupChart)
+  return new Promise((resolve) => {
+    d3.loadData('assets/data/sideEffects.csv', (err, response) => {
+      data = cleanData(response[0])
+      $sideEffects.each(setupChart)
+      resolve()
+    })
   })
 }
 export default { init, resize };
