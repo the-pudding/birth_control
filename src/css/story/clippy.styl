@@ -10,8 +10,9 @@
     position absolute
     bottom -40px
     right 5%
-    transform scale(2)
-    transition 300ms
+    transform translate(0, 0) scale(2)
+    transition transform 300ms
+    pointer-events all
 
     &.hiding
       .body
@@ -24,16 +25,84 @@
           transition 300ms
 
   &-info
-    width 50%
-    height 50%
-    top 0
-    left 0
-    transform translate(50%, 50%)
-    background-color: $secondary
+    display flex
+    justify-content: center
+    align-items: center
+    position absolute
+    width 100%
+    height 100%
+
+  .info-container
+    width 360px
+    height 550px
+    background-color: $light-purple
+    display flex
+    //justify-content center
+    align-items center
+    flex-direction column
+    // width 50%
+    // height 50%
+    // top 0
+    // left 0
+    // transform translate(50%, 50%)
+    // background-color: $light-purple
+    border 5px solid $mid-purple
+    border-radius 10px
     visibility hidden
+
+    &:after
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 75%;
+      width: 0;
+      height: 0;
+      border: 50px solid transparent;
+      border-top-color: $mid-purple;
+      border-bottom: 0;
+      border-right: 0;
+      margin-left: -10px;
+      margin-bottom: -50px;
 
     &.active
       visibility: visible;
+
+    .close-info
+      //color $white
+      height 30px
+      width 30px
+      background-color: $mid-purple
+      border: 2px solid $gray-darkest
+      align-self flex-end
+      transform translate(5px, -275px)
+      border-radius 50%
+      position absolute
+      display flex
+      align-items: center;
+      justify-content: center
+      transition 300ms ease
+      pointer-events: all
+      +mq('bp-3')
+        transform translate(-5px, 5px)
+
+      svg
+        transform scale(0.8)
+        color $white
+
+      &:hover
+        background-color $brown-light
+        transition 300ms ease
+
+
+  &-dim
+    width 100%
+    height 100%
+    background-color: $white
+    opacity 0
+    position fixed
+
+    &.active
+      opacity 0.6
 
   &-speech
     width 150px
