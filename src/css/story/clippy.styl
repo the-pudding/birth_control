@@ -49,6 +49,7 @@
     flex-direction column
     width 75%
     max-height 65%
+    overflow hidden
     // top 0
     // left 0
     // transform translate(50%, 50%)
@@ -141,6 +142,10 @@
         background-color $secondary
         transition 300ms ease
 
+    .info-source
+      text-transform uppercase
+      set-type-size('x-small', true)
+      font-family Atlas Grotesk, sans-serif
 
 
   &-dim
@@ -178,3 +183,7 @@
       border-bottom: 0;
       margin-left: -20px;
       margin-bottom: -20px;
+
+  .simplebar-scrollbar
+    &::before
+      background white !important

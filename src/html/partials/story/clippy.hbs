@@ -2,7 +2,7 @@
   <div class='clippy-dim'></div>
   <div class='clippy-character hiding'>@@include('clippy.svg')</div>
   <div class='clippy-info'>
-    <div class='info-container'>
+    <div class='info-container' id='info-container' data-simplebar data-simplebar-auto-hide="false">
         <div class='close-info'>@@include('x.svg')</div>
 
         <p class='info-title'></p>
@@ -12,14 +12,22 @@
         <div>
           <p class='info-description'></p>
           <div>
-            <p class='info-sub'>Effectiveness</p>
+            <p class='info-sub'>Effectiveness:</p>
             <p class='info-prose info-prose-eff'></p>
           </div>
+
+          <div>
+            <p class='info-sub'>Cost:</p>
+            <p class='info-prose info-prose-cost'></p>
+          </div>
+
           <div>
             <p class='info-sub'>How It Works:</p>
             <p class='info-prose info-prose-how'></p>
           </div>
+
           <a class="link" target="_blank"><p class='link-p' data-address="">Learn More</p></a>
+          <p class='info-source'>Info from <a href='https://www.plannedparenthood.org/learn/birth-control' target='_blank'>Planned Parenthood</a></p>
       </div>
     </div>
   <div class='clippy-speech'></div>

@@ -34,6 +34,9 @@ function handleClick(){
   info.select('.info-def')
     .text(details.definition)
 
+  info.select('.info-prose-cost')
+    .text(details.cost)
+
   info.select('.info-prose-eff')
     .text(`${details.effectiveness} effective at preventing pregnancy`)
 

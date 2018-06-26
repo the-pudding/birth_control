@@ -8,9 +8,12 @@ import overTime from './overTime'
 import multiple from './multipleMethods'
 import sideEffects from './sideEffects'
 import clippy from './clippy'
+import SimpleBar from 'SimpleBar';
 
 const $body = d3.select('body');
 let previousWidth = 0;
+
+new SimpleBar(document.getElementById('info-container'));
 
 function resize() {
 	// only do resize on width changes, not height
