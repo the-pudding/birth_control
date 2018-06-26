@@ -102,6 +102,22 @@
       "effectiveness": "90%",
       "how": "The insertion of a copper IUD hinders the ability of sperm to move and find the egg. Emergency contraceptive pills don't end an existing pregnancy, but they can prevent the sperm from meeting up with the egg in the first place.",
       "learn": "https://www.plannedparenthood.org/learn/morning-after-pill-emergency-contraception"
+    },
+    "hormonal implant": {
+      "definition": "A small, thin rod that is inserted into your arm and releases the hormone progestin to prevent pregnancy.",
+      "prescription": "This must be inserted by a doctor or nurse",
+      "cost": "Up to $1,300, but can be $0",
+      "effectiveness": "99%",
+      "how": "The hormone in the implant prevent an egg from being released and also thicken the cervical mucus, slowing down sperm movement.",
+      "learn": "https://www.plannedparenthood.org/learn/birth-control/birth-control-implant-implanon"
+    },
+    "diaphragm": {
+      "definition": "A diaphragm is a small, bendable cup that is inserted into the vagina before sex.",
+      "prescription": "yes",
+      "cost": "Up to $75, but can be $0",
+      "effectiveness": "88%",
+      "how": "The diaphragm creates a barrier that covers the cervix, stopping sperm from finding and joining the egg.",
+      "learn": "https://www.plannedparenthood.org/learn/birth-control/diaphragm"
     }
 
 }

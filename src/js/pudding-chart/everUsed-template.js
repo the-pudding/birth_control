@@ -38,6 +38,7 @@ d3.selection.prototype.ever_used = function init(options) {
 			// called once at start
 			init() {
 				$sel.at('data-clippy', data.name)
+					.style('cursor', 'pointer')
         $blocks = $sel.append('div.blocks')
         $title = $sel.append('text.title')
         $sub = $sel.append('text.sub')

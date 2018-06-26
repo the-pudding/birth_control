@@ -11,8 +11,10 @@
     bottom -40px
     right 5%
     transform translate(0, 0) scale(2)
-    transition transform 300ms
     pointer-events all
+    .body
+      transform translate(0, 0)
+      transition transform 300ms
 
     &.hiding
       .body
@@ -33,21 +35,24 @@
     height 100%
 
   .info-container
-    width 360px
-    height 550px
+    // width 360px
+    // height 550px
     background-color: $light-purple
     display flex
+    padding 1rem
     //justify-content center
-    align-items center
+    align-items flex-start
     flex-direction column
-    // width 50%
-    // height 50%
+    width 75%
+    max-height 65%
     // top 0
     // left 0
     // transform translate(50%, 50%)
     // background-color: $light-purple
     border 5px solid $mid-purple
     border-radius 10px
+    transition 300ms ease
+    opacity 0
     visibility hidden
 
     &:after
@@ -66,6 +71,8 @@
 
     &.active
       visibility: visible;
+      opacity 1
+      transition 300ms ease
       pointer-events: all
 
     .close-info
@@ -75,7 +82,6 @@
       background-color: $mid-purple
       border: 2px solid $gray-darkest
       align-self flex-end
-      transform translate(5px, -275px)
       border-radius 50%
       position absolute
       display flex
@@ -83,16 +89,52 @@
       justify-content: center
       transition 300ms ease
       pointer-events: all
-      +mq('bp-3')
-        transform translate(-5px, 5px)
+      cursor pointer
 
       svg
         transform scale(0.8)
         color $white
 
       &:hover
-        background-color $brown-light
+        background-color $secondary
         transition 300ms ease
+
+    .info-title
+      text-transform: capitalize;
+      font-family: Canela, serif
+      set-type-size('x-large', true)
+
+    .info-def
+      font-family: Atlas Grotesk, sans-serif
+      set-type-size('small', true)
+      margin-bottom 0.25rem
+
+    .info-sub
+      font-family: Atlas Grotesk, sans-serif
+      font-weight 600
+      margin-bottom 0
+
+    .info-prose
+      font-family Atlas Grotesk, sans-serif
+      margin-top 0.25rem
+      set-type-size('small', true)
+
+    .link-p
+      font-family Atlas Grotesk, sans-serif
+      text-transform uppercase
+      background-color $mid-purple
+      width 130px
+      text-align center
+      padding-top 0.1rem
+      font-weight 600
+      color $white
+      border-radius 5px
+      margin 0 auto
+
+      &:hover
+        background-color $secondary
+        transition 300ms ease
+
 
 
   &-dim
