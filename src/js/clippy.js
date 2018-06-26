@@ -14,8 +14,16 @@ function handleClick(){
   const sel = d3.select(this)
   const name = sel.at('data-clippy').toLowerCase()
 
-  const details = copy[`${name}`]
-  console.log({details})
+  const methodNames = ['condom', 'pill', 'withdrawal', 'depo-provera', 'calendar', 'patch', 'vasectomy', 'ring', 'iud', 'thermal', 'standard', 'sterilization', 'emergency', 'hormonal implant', 'diaphragm']
+
+  const justNames = methodNames.map(d => {
+    const incl = name.includes(d)
+    return {name: d, includes: incl}
+  })
+    .filter(d => d.includes === true)[0]
+
+  console.log({methodNames, justNames})
+  const details = copy[`${justNames.name}`]
 
   info
     .classed('active', true)
@@ -34,6 +42,9 @@ function handleClick(){
 
   info.select('.link')
     .attr('href', details.learn)
+
+  info.select('.info-img')
+    .attr('src', `assets/images/${details.img}.png`)
 
   clippy
     .classed('hiding', false)
