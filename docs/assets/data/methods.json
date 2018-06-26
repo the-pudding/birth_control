@@ -1,0 +1,138 @@
+{
+    "condom": {
+      "definition": "Condoms are small, stretchy pouches that are worn over a penis during sex. Unlike other methods, condoms prevent against both pregnancy and STIs.",
+      "prescription": "no",
+      "cost": "Up to $2",
+      "effectiveness": "85%",
+      "how": "Condoms collect expelled semen, preventing the sperm from entering the vagina. They also prevent contact with vaginal fluids and skin to skin contact that could allow for the transmission of STIs.",
+      "learn": "https://www.plannedparenthood.org/learn/birth-control/condom",
+      "img": "condom"
+    },
+    "pill": {
+      "definition": "Birth control pills, colloquially known as 'The Pill', are a type of medicine that contains hormones and is used to prevent pregnancy, and control acne, menstural pain, and other medical conditions.",
+      "prescription": "yes",
+      "cost": "Up to $50, but can be $0",
+      "effectiveness": "91%",
+      "how": "The Pill prevents ovulation, meaning that no egg would be present to fertilize. The hormones also thicken the cervical mucus, making travel difficult for semen.",
+      "learn": "https://www.plannedparenthood.org/learn/birth-control/birth-control-pill",
+      "img": "pill"
+    },
+    "withdrawal": {
+      "definition": "Withdrawal (aka, 'Pulling Out') entails removing the penis completely from the vagina before ejaculation occurs.",
+      "prescription": "no",
+      "cost": "$0",
+      "effectiveness": "78%",
+      "how": "Withdrawal keeps semen away from the vagina.",
+      "learn": "https://www.plannedparenthood.org/learn/birth-control/withdrawal-pull-out-method",
+      "img": "withdrawal"
+    },
+    "depo-provera": {
+      "definition": "Depo-Provera, also known as 'The Depo Shot', is an injection containing the hormone progestin that is received every 3 months.",
+      "prescription": "No, but it must be administered by a doctor or nurse",
+      "cost": "Up to $100, but can be $0",
+      "effectiveness": "94%",
+      "how": "The birth control shot prevents ovulation, meaning that no egg would be present to fertilize. The hormones also thicken the cervical mucus, making travel difficult for semen.",
+      "learn": "https://www.plannedparenthood.org/learn/birth-control/birth-control-shot",
+      "img": "depo-provera"
+    },
+    "calendar": {
+      "definition": "Using the details from your last several menstrual cycles, you can estimate when you are likely to be fertile and utilize alternative forms of birth control during those days.",
+      "prescription": "no",
+      "cost": "Up to $20, but may be $0",
+      "effectiveness": "76-88%",
+      "how": "Since most people are only fertile for a few days each month, this method uses the length of your previous menstrual cycles to predict when your next most fertile days would be.",
+      "learn": "https://www.plannedparenthood.org/learn/birth-control/fertility-awareness/whats-calendar-method-fams",
+      "img": "calendar"
+    },
+    "patch": {
+      "definition": "The patch is a type of birth control that adheres to the skin of your belly, upper arm, butt, or back. The patch is replaced once a week for 3 weeks out of every 4.",
+      "prescription": "yes",
+      "cost": "Up to $150, but can be $0",
+      "effectiveness": "91%",
+      "how": "The patch releases the hormones estrogen and progestin which are absorbed by your skin to prevent the release of eggs. The hormones also thicken the cervical mucus, making sperm travel more difficult.",
+      "learn": "https://www.plannedparenthood.org/learn/birth-control/birth-control-patch",
+      "img": "patch"
+    },
+    "vasectomy": {
+      "definition": "Vasectomy, also referred to as 'Male Sterilization', is a surgical procedure that is intended to permanently protect against pregnancy.",
+      "prescription": "This is a surgical procedure.",
+      "cost": "Up to $1000, but can be $0",
+      "effectiveness": "99%",
+      "how": "During a vasectomy, the tubes that carry sperm from the scrotum are severed or blocked, preventing sperm from entering the semen and leaving the body.",
+      "learn": "https://www.plannedparenthood.org/learn/birth-control/vasectomy",
+      "img": "sterilization"
+    },
+    "ring": {
+      "definition": "Also known as The Birth Control Ring or NuvaRing, is a small, flexible ring worn inside the vagina that releases the hormones estrogen and progestin.",
+      "prescription": "yes",
+      "cost": "Up to $200, but can be $0",
+      "effectiveness": "91%",
+      "how": "The release of hormones from the ring prevent an egg from being released and thus there is no egg to be fertilized. The hormones also thicken the mucus of the cervix, making travel difficult for sperm.",
+      "learn": "https://www.plannedparenthood.org/learn/birth-control/birth-control-vaginal-ring-nuvaring",
+      "img": "ring"
+    },
+    "iud": {
+      "definition": "Intrauterine Devices (i.e. IUD), are small T-shaped devices that are inserted into the uterus to prevent pregnancy. There are both hormonal IUDs (that release the hormone progestin) and non-hormonal IUDs (which are wrapped in a small amount of copper).",
+      "prescription": "Must be inserted by a doctor or nurse",
+      "cost": "Up to $1,300, but can be $0",
+      "effectiveness": "99%",
+      "how": "Both the hormonal and copper IUDs alter sperm movement to prevent pregnancy. Sperm avoid the copper or the hormones thicken the cervical mucus, making movement difficult for the sperm.",
+      "learn": "https://www.plannedparenthood.org/learn/birth-control/iud",
+      "img": "iud"
+    },
+    "thermal": {
+      "definition": "By combining daily temperature measurements, vaginal discharge observations, and the pattern of your monthly menstrual cycle, you can try to predict when you are most likely to be fertile.",
+      "prescription": "no",
+      "cost": "Up to $20 for supplies",
+      "effectiveness": "76-88%",
+      "how": "Since body temperature and the type of cervical mucus change slightly throughout the menstrual cycle, tracking them along with other information about your cycle",
+      "learn": "https://www.plannedparenthood.org/learn/birth-control/fertility-awareness/whats-temperature-method-fams",
+      "img": "sympto"
+    },
+    "standard": {
+      "definition": "For people with very regular menstrual cycles consistently longer than 26 days and shorter than 32 days, the Standard Days method helps to predict when the user is fertile.",
+      "prescription": "no",
+      "cost": "Up to $20 for supplies",
+      "effectiveness": "76-88%",
+      "how": "Since this method is only recommended for people with very regular cycles, it works by having the user prevent vaginal sex (or using another form of birth control) on days 8-19 of their cycle each month, when they are most likely to become pregnant.",
+      "learn": "https://www.plannedparenthood.org/learn/birth-control/fertility-awareness/whats-standard-days-method",
+      "img": "standard"
+    },
+    "sterilization": {
+      "definition": "Tubal ligation, sometimes referred to as female sterilization or 'getting your tubes tied', is a surgical procedure that permanently prevents pregnancy.",
+      "prescription": "This is a surgical procedure.",
+      "cost": "Up to $6,000, but can be $0",
+      "effectiveness": "99%",
+      "how": "This procedure works by closing or blocking the fallopian tubes - the pathway through which the egg travels from the ovaries. With the pathway blocked, eggs can't get through to find any sperm.",
+      "learn": "https://www.plannedparenthood.org/learn/birth-control/sterilization",
+      "img": "sterilization"
+    },
+    "emergency": {
+      "definition": "If birth control wasn't used or it failed, emergency contraception can be used with 5 days to prevent pregnancy. There are a few options: get a copper IUD or take an emergency contraceptive pill (aka the morning-after pill).",
+      "prescription": "varies by method",
+      "cost": "varies by method",
+      "effectiveness": "90%",
+      "how": "The insertion of a copper IUD hinders the ability of sperm to move and find the egg. Emergency contraceptive pills don't end an existing pregnancy, but they can prevent the sperm from meeting up with the egg in the first place.",
+      "learn": "https://www.plannedparenthood.org/learn/morning-after-pill-emergency-contraception",
+      "img": "emergency"
+    },
+    "hormonal implant": {
+      "definition": "A small, thin rod that is inserted into your arm and releases the hormone progestin to prevent pregnancy.",
+      "prescription": "This must be inserted by a doctor or nurse",
+      "cost": "Up to $1,300, but can be $0",
+      "effectiveness": "99%",
+      "how": "The hormone in the implant prevent an egg from being released and also thicken the cervical mucus, slowing down sperm movement.",
+      "learn": "https://www.plannedparenthood.org/learn/birth-control/birth-control-implant-implanon",
+      "img": "implant"
+    },
+    "diaphragm": {
+      "definition": "A diaphragm is a small, bendable cup that is inserted into the vagina before sex.",
+      "prescription": "yes",
+      "cost": "Up to $75, but can be $0",
+      "effectiveness": "88%",
+      "how": "The diaphragm creates a barrier that covers the cervix, stopping sperm from finding and joining the egg.",
+      "learn": "https://www.plannedparenthood.org/learn/birth-control/diaphragm",
+      "img": "diaphragm"
+    }
+
+}
