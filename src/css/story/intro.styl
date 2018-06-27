@@ -1,9 +1,10 @@
 .intro
 	margin 0 auto
 	padding 4rem 1rem 1.5rem 1rem
+	height 75%
 
 	&__hed
-		max-width 60rem
+		max-width 50rem
 		margin 0 auto
 		padding-top 5rem
 		font-weight 400
@@ -13,18 +14,30 @@
 			set-type-size('xxx-large', true)
 		+mq('bp-5')
 			set-type-size('xxxx-large', true)
-	
+
+		#titleMethod
+			display inline-block
+			background-color $secondary
+			//border 4px solid $mid-purple
+			padding 0.5rem 1rem
+			border-radius 10px
+			color $white
+			set-type-size('xxx-large', true)
+
 	&__byline
 		max-width $column-width
 		margin 0 auto
-		padding-top 5rem
-		padding-bottom 1.5rem
+		padding-top 2rem
+		padding-bottom 2rem
 		text-align center
 		set-type-size('small', true)
-		
+
 	&__dek
-		max-width $column-width
-		margin 0 auto
+		max-width 30rem
+		margin 1.5rem auto
 		padding-top 1.5rem
 		text-align center
+		font-weight 600
+		border-top 2px solid $quaternary
 		set-type-size('medium', true)
+		color $secondary

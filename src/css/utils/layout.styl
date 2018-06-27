@@ -31,7 +31,7 @@ h5
 h6
 	set-type-size(small, true)
 	margin-top 1.5rem
-p 
+p
 	margin 1.5rem 0
 	set-type-size(root, true)
 	+mq('bp-3')
@@ -39,17 +39,19 @@ p
 
 a
 	text-decoration none
-	border-bottom 1px solid $off-black
+	border-bottom 1px solid $secondary
 	color $off-black
-	&:visited, &:hover
-		color $off-black
+	transition 300ms
+	&:hover
+		transition 300ms
+		color $secondary
 
 strong, b
 	font-weight bold
 
 em, i
 	font-style italic
-	
+
 ul
 	list-style-type none
 
