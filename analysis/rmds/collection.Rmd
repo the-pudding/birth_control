@@ -62,6 +62,7 @@ library(forcats)
 ## For graphing
 library(igraph)
 library(RColorBrewer)
+library(viridis)
 ```
 
 ## Importing data
@@ -219,7 +220,7 @@ condenseUsage <- function(monthNum){
 }
 ```
 
-```{r echo = FALSE eval = FALSE}
+```{r echo = FALSE, eval = FALSE}
 switch_subID <- switch_sub %>% 
   select(c("CASEID", "EVERUSED"))
 
@@ -255,9 +256,8 @@ usageMap <- map_dfc(monthNumbers, condenseUsage) %>%
 So far, so good. Looks like we've got some pretty workable methods for cleaning the data we'll need, but I want to look at more than just 2013 - 2015. The CDC has data going back to the 70's, but for now, let's just go back to 2006  
 
 ### Finding links for all data sources
-```{r}
+```{r eval = FALSE}
 dataURL_0610 <- "ftp://ftp.cdc.gov/pub/Health_Statistics/NCHS/Datasets/NSFG/2006_2010_FemResp.dat"
-#codeURL_0610 <- "ftp://ftp.cdc.gov/pub/Health_Statistics/NCHS/Datasets/NSFG/sas/2006_2010_FemRespSetup.sas"
 codeURL_0610 <- here("raw_data", "2006_2010_FemRespSetup.sas.txt")
 dataURL_1113 <- "ftp://ftp.cdc.gov/pub/Health_Statistics/NCHS/Datasets/NSFG/2011_2013_FemRespData.dat"
 codeURL_1113 <- "ftp://ftp.cdc.gov/pub/Health_Statistics/NCHS/Datasets/NSFG/sas/2011_2013_FemRespSetup.sas"
@@ -274,6 +274,7 @@ data_1113 <- read.SAScii(
   sas_ri = codeURL_1113
 )
 ```
+
 ```{r eval = FALSE, echo = FALSE}
 saveRDS(data_0610, here("raw_data", "data_0610.rds"))
 saveRDS(data_1113, here("raw_data", "data_1113.rds"))
@@ -371,13 +372,17 @@ firstTimeYear <- allData %>%
   select(method, decade, percent) %>% 
   ungroup() %>% 
   group_by(method) %>% 
-  arrange(factor(decade, levels = c("70's", "80's", "90's", "00's", "10's")), decade)
+  mutate(decade = factor(decade, levels = c("70's", "80's", "90's", "00's", "10's")), decade) %>% 
+  arrange(decade) %>% 
+  ungroup()
 
 ## Export data to csv for graphing
 write.csv(firstTimeYear, "../../src/assets/data/firstTime.csv", row.names = FALSE)
 
-firstTimeYearPlot <- ggplot(firstTimeYear, aes(x = decade, y = percent, group = as.factor(FIRSMETH1), color = as.factor(FIRSMETH1))) +
+firstTimeYearPlot <- ggplot(firstTimeYear, aes(x = decade, y = percent, group = as.factor(method), color = as.factor(method))) +
   geom_line()
+
+firstTimeYearPlot
 
 ggsave(here("plots", "firstTimeYear.svg"), firstTimeYearPlot, device = "svg", width = 10, height = 5)
 ```
@@ -734,7 +739,6 @@ commonCombo <- allNetworkData %>%
   group_by(m_a, m_b) %>% 
   summarise(uniqueR = n_distinct(CASEID)) %>% 
   arrange(desc(uniqueR)) %>% 
-  filter(uniqueR > 250) %>% 
   ungroup() %>% 
   mutate(row = row_number())
 
@@ -753,7 +757,7 @@ write.csv(combo2, "../../src/assets/data/multipleMethods.csv", row.names = FALSE
 ggplot(commonCombo, aes(x = row, y = uniqueR)) + geom_bar(stat = "identity") + coord_flip()
 
 ggplot(commonCombo, aes(m_a, m_b)) +
-  geom_tile(aes(fill = log(unique)), color = "white") +
+  geom_tile(aes(fill = log(uniqueR)), color = "white") +
   scale_fill_viridis(option = "plasma") +
   ylab("Method A") +
   xlab("Method B") +
@@ -1022,6 +1026,8 @@ write.csv(fullAge, "../../src/assets/data/overTime.csv", row.names = FALSE)
   
 
 facetAge <- ggplot(fullAge, aes(x = calcAge, y = percent, group = method, color = method)) + geom_line() + geom_area() + facet_wrap(~method)
+
+facetAge
 
 ggsave(here("plots", "facetAge.svg"), facetAge, device = "svg", width = 10, height = 7)
 
