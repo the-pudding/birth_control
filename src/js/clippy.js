@@ -1,13 +1,28 @@
 // D3 is included by globally by default
+import enterView from 'enter-view';
 
 // selections
 const clippy = d3.select('.clippy-character');
 const info = d3.select('.info-container')
 const dim = d3.select('.clippy-dim')
 const close = d3.select('.close-info')
+const welcome = d3.select('.clippy-speech')
 
 let copy = null
 
+function setupEnter() {
+	enterView({
+		selector: '#clippy-welcome',
+		offset: 0,
+		once: false,
+		enter(el) {
+			welcome.classed('active', true)
+		},
+		exit(el) {
+			welcome.classed('active', false)
+		}
+	});
+}
 function resize() {}
 
 function handleClick(){
@@ -22,8 +37,9 @@ function handleClick(){
   })
     .filter(d => d.includes === true)[0]
 
-  console.log({methodNames, justNames})
   const details = copy[`${justNames.name}`]
+
+  welcome.classed('active', false)
 
   info
     .classed('active', true)
@@ -54,7 +70,6 @@ function handleClick(){
 
   dim
     .classed('active', true)
-  console.log({sel, name})
 }
 
 function closeInfo(){
@@ -71,7 +86,7 @@ function closeInfo(){
 function init() {
   d3.loadData('assets/data/methods.json', (err, response) => {
     copy = response[0]
-    console.log({copy})
+    setupEnter()
   })
 
 	const clickable = d3.selectAll('[data-clippy]')
@@ -79,7 +94,11 @@ function init() {
 
   close
     .on('click', closeInfo)
-	console.log({ clickable });
+
+  const closeWelcome = welcome.select('.welcome-close span')
+    .on('click', d => {
+      welcome.classed('active', false)
+    })
 }
 
 export default { init, resize };

@@ -171,30 +171,102 @@
       opacity 0.6
 
   &-speech
-    width 150px
-    height 150px
-    position absolute
-    background-color: $secondary
-    border-radius .4em
-    bottom 100px
-    right 1.5%
+    background-color $light-purple
+    border 1px solid $mid-purple
+    border-radius 5px;
+    width 150px;
+    text-align center;
+    padding 0.2rem 1rem
+    position absolute;
     visibility hidden
+    right 1.5%
+    bottom 100px
+    //transition visibility 300ms
 
     &.active
       visibility visible
+      animation-duration 5s
+      animation-name speech
+      animation-iteration-count: 1
 
-    &:after
-      content: '';
+
+    &-arrow
+      border-style: solid;
       position: absolute;
-      bottom: 0;
-      left: 50%;
-      width: 0;
-      height: 0;
-      border: 20px solid transparent;
-      border-top-color: $secondary;
-      border-bottom: 0;
-      margin-left: -20px;
-      margin-bottom: -20px;
+      border-color: $mid-purple transparent transparent transparent;
+      border-width: 8px 8px 0px 8px;
+      bottom: -8px;
+      left: 67px
+
+      &:after
+        border-color: $light-purple transparent transparent transparent;
+        border-style: solid;
+        border-width: 7px 7px 0px 7px;
+        bottom: 1px;
+        content: "";
+        position: absolute;
+        left: -7px;
+
+    .welcome-title
+      set-type-size('small', true)
+      text-transform uppercase
+      font-weight 600
+      font-family Atlas Grotesk, sans-serif
+      color $secondary
+      margin 0.5rem 0
+
+    .welcome-text
+      set-type-size('small', true)
+      font-family Atlas Grotesk, sans-serif
+      margin 0.5rem 0
+
+    .welcome-close
+      margin-bottom 0.5rem
+      margin-top 0rem
+
+      span
+        font-family Atlas Grotesk, sans-serif
+        font-weight 600
+        set-type-size('small', true)
+        background-color $secondary
+        padding 0.25rem
+        border-radius 5px
+        margin 0.25rem 0
+        color $white
+        transition background-color 300ms
+        pointer-events all
+        cursor pointer
+
+        &:hover
+          background-color $primary
+          transition 300ms
+
+
+  // &-speech
+  //   width 150px
+  //   height 150px
+  //   position absolute
+  //   background-color: $secondary
+  //   border-radius .4em
+  //   bottom 100px
+  //   right 1.5%
+  //   visibility hidden
+  //
+  //   &.active
+  //     visibility visible
+  //
+  //   &:after
+  //     content: '';
+  //     position: absolute;
+  //     bottom: 0;
+  //     left: 50%;
+  //     width: 0;
+  //     height: 0;
+  //     border: 20px solid transparent;
+  //     border-top-color: $secondary;
+  //     border-bottom: 0;
+  //     margin-left: -20px;
+  //     margin-bottom: -20px;
 
   .simplebar-scrollbar
     &::before
@@ -202,15 +274,25 @@
 
 @keyframes bg
   0%, 100%
-    fill $clippy
+    //fill $clippy
+    transform translate(0, 5px) scaleY(0.1)
   5%, 95%
-    fill $secondary
+    //fill $secondary
+    transform translate(0, 0) scaleY(1)
+
 
 @keyframes pupil
   0%, 100%
     opacity 0
   5%, 95%
     opacity 1
+
+@keyframes speech
+  0%, 100%
+    transform translate(0, 100px) scaleY(0.1)
+
+  5%, 95%
+    transform translate(0, 0) scaleY(1)
 
 
 		// 0%

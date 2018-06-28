@@ -9,13 +9,13 @@
 <path d="M0 0C1.21212 0.254015 3.90909 1.62569 5 5.08029" transform="translate(39.0995 13.0504) rotate(6)" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
 <path d="M11.2107 1.5C10.537 3.20123 8.74871 4.5 6.5 4.5C4.25129 4.5 2.46297 3.20123 1.78933 1.5H11.2107Z" transform="translate(21 36)" stroke="#A841EA" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
 <g class="eyes">
-<g class="eye">
-<rect class="eye-bg" width="3.18182" height="5.71533" rx="1.59091" transform="translate(19.0909 24.1314)" fill="#A841EA"/>
-<ellipse class="eye-pupil" cx="0.954545" cy="0.952555" rx="0.954545" ry="0.952555" transform="translate(19.0909 24.1314)" fill="white"/>
+<g class="eye" transform="translate(19.0909 24.1314)">
+<rect class="eye-bg" width="3.18182" height="5.71533" rx="1.59091" fill="#A841EA"/>
+<ellipse class="eye-pupil" cx="0.954545" cy="0.952555" rx="0.954545" ry="0.952555" fill="white"/>
 </g>
-<g class="eye">
-<rect class="eye-bg" width="3.18182" height="5.71533" rx="1.59091" transform="translate(31.8182 24.1314)" fill="#A841EA"/>
-<ellipse class="eye-pupil" cx="0.954545" cy="0.952555" rx="0.954545" ry="0.952555" transform="translate(31.8182 24.1314)" fill="white"/>
+<g class="eye" transform="translate(31.8182 24.1314)">
+<rect class="eye-bg" width="3.18182" height="5.71533" rx="1.59091" fill="#A841EA"/>
+<ellipse class="eye-pupil" cx="0.954545" cy="0.952555" rx="0.954545" ry="0.952555" fill="white"/>
 </g>
 </g>
 </g>
