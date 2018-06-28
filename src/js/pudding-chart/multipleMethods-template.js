@@ -165,7 +165,8 @@ d3.selection.prototype.multipleMethods = function init(options) {
 					.at('data-clippy', d => {
 						if (d == '+') return null
 						else return d
-				})
+					})
+					.style('cursor', 'pointer')
           //.attr('text-anchor', 'end')
 
 

@@ -121,6 +121,7 @@ d3.selection.prototype.firstTime = function init(options) {
 						else label = null
 						return label
 					})
+					.style('cursor', 'pointer')
 
         lineGroups
           .append('path')

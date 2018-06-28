@@ -58,6 +58,7 @@ d3.selection.prototype.sideEffects = function init(options) {
 			// called once at start
 			init() {
         $sel.at('data-clippy', data.key)
+          .style('cursor', 'pointer')
         const titleGroup = $sel.append('div.chart-legend')
         titleGroup.append('text')
           .text(data.key)
