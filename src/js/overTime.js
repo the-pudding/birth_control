@@ -19,7 +19,7 @@ const fullNames = [{
   full: "Partner's Vasectomy"
 }, {
   short: '6',
-  full: 'Female Sterilization'
+  full: 'Tubal Ligation'
 }, {
   short: '7',
   full: 'Withdrawal'

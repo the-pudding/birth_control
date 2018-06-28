@@ -17,7 +17,7 @@ const fullNames = [{
   failure: 18
 }, {
   short: '6',
-  full: 'Female Sterilization',
+  full: 'Tubal Ligation',
   failure: 0.5
 }, {
   short: '7',

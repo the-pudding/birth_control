@@ -29,7 +29,7 @@ function handleClick(){
   const sel = d3.select(this)
   const name = sel.at('data-clippy').toLowerCase()
 
-  const methodNames = ['condom', 'pill', 'withdrawal', 'depo-provera', 'calendar', 'patch', 'vasectomy', 'ring', 'iud', 'thermal', 'standard', 'sterilization', 'emergency', 'hormonal implant', 'diaphragm']
+  const methodNames = ['condom', 'pill', 'withdrawal', 'depo-provera', 'calendar', 'patch', 'vasectomy', 'ring', 'iud', 'thermal', 'standard', 'tubal', 'emergency', 'hormonal implant', 'diaphragm']
 
   const justNames = methodNames.map(d => {
     const incl = name.includes(d)

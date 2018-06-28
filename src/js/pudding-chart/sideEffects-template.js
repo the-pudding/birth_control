@@ -211,71 +211,8 @@ d3.selection.prototype.sideEffects = function init(options) {
         labelsEnter
           .attr('transform', d => `translate(${scaleX(d.percent) + textPaddingSide}, 0)`)
 
-        // labelsEnter
-        //   .append('rect')
-        //   .attr('class', 'label-rect')
-        //   .attr('width', function(d){
-        //     const parent = d3.select(this.parentNode)
-        //     const text = parent.selectAll('.label-text')
-        //     const bbox = text.node().getBBox()
-        //     return bbox.width + (textPaddingSide * 2)
-        //   })
-        //   .attr('height', (textPaddingTop * 2) + fontSize)
-        //   .style('fill', d => {
-        //     if (d == "+") return 'none'
-        //     else {
-        //       const failure = fullNameMap.get(d).failure
-        //       const level = setEffectivenessLevel(failure)
-        //       return `${scaleColor(level)}`
-        //     }
-        //   })
-        //   .attr('rx', 5)
-        //   .attr('ry', 5)
-        //   .lower()
-
-        // const allGroups = $vis.selectAll('.g-label').nodes()
-        //
-        // const allBBox = allGroups
-        //   .map((d, i) => {
-        //     const bboxWidth = d.getBBox().width
-        //     const self = bboxWidth + textPaddingSide
-        //     return {bboxWidth: bboxWidth, self: self}
-        //   })
-        //
-        //   console.log({allBBox})
-        //
-        //
-        // const gLabels = $vis.selectAll('.g-label')
-        //   .attr('transform', function(d, i){
-        //     const remainder = i % 3
-        //     const self = allBBox[i].self
-        //     let horiz = null
-        //     if (remainder === 0) {
-        //       const second = allBBox[i + 1].bboxWidth
-        //       const third = allBBox[i + 2].bboxWidth
-        //
-        //       horiz = second + third + self
-        //     }
-        //     else if (remainder === 1) {
-        //       horiz = allBBox[i + 1].bboxWidth + self
-        //     }
-        //     else if(remainder === 2) horiz = self
-        //
-        //     if (narrow == false) return `translate(${-horiz}, ${-textPaddingTop})`
-        //     else if (narrow == true) {
-        //       let y = null
-        //       if (remainder === 0 || remainder === 1) y = 0
-        //       else if (remainder === 2) y = (textPaddingTop * 2) + fontSize
-        //
-        //       return `translate(${-self}, ${y})`
-        //     }
-        //   })
-
         barGroups
           .attr('transform', (d, i) => `translate(0, ${i * (barHeight + paddingHeight)})`)
-        //
-        // const barsMove = barGroups.selectAll('.bar')
-
 
 
 				return Chart;
