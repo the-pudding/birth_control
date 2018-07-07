@@ -3,7 +3,7 @@
     display flex
     flex-direction column
     max-width $column-width
-    margin 0 auto
+    //margin 0 auto
 
   .container
     display flex
@@ -15,7 +15,13 @@
       flex-direction column
       align-items: center
       margin 0.5rem 0rem
-      width 120px
+      width 130px
+      transition 300ms
+      padding 0.5rem
+
+      &:hover
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)
+        transition 300ms
       // +mq('bp-4')
       //   margin 1rem
 
@@ -49,10 +55,10 @@
   flex-direction column
   align-items: center
   max-width $column-width
-  margin 0 auto
+  margin 0 auto 4rem auto
   +mq('bp-6')
     flex-direction row
-    align-items: flex-end;
+    align-items: center;
     justify-content: space-between;
 
     .graphic-half
@@ -88,7 +94,7 @@
             stroke-opacity 1
 
         .label
-          font-family Atlas Grotesk, sans-serif
+          font-family Atlas Grotesk Web, sans-serif
           set-type-size('x-small', true)
           text-transform uppercase
           font-weight 600
@@ -109,14 +115,14 @@
             .tick
               text
                 set-type-size('xx-small', true)
-                font-family Atlas Grotesk, sans-serif
+                font-family Atlas Grotesk Web, sans-serif
 
           &-y
             .tick
               text
                 font-weight 600
                 set-type-size('xx-small', true)
-                font-family Atlas Grotesk, sans-serif
+                font-family Atlas Grotesk Web, sans-serif
 
               &:first-of-type
                 text
@@ -133,15 +139,21 @@
   margin 0 auto
 
   .container-over_time
-    justify-content: space-around;
+    justify-content: flex-start;
 
     .chart
-      width 150px
+      width 170px
       height 125px
-      margin 1rem 0
+      margin 1rem
+      transition 300ms
+      padding 0.5rem
+
+      &:hover
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)
+        transition 300ms
 
       .title
-        font-family Atlas Grotesk, sans-serif
+        font-family Atlas Grotesk Web, sans-serif
         margin-bottom 0.5rem
 
       .g-axis
@@ -162,7 +174,7 @@
         .axis-x
           text
             set-type-size('x-small', true)
-            font-family Atlas Grotesk, sans-serif
+            font-family Atlas Grotesk Web, sans-serif
             text-transform uppercase
             fill $gray
 

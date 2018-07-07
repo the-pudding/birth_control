@@ -15,8 +15,8 @@ d3.selection.prototype.over_time = function init(options) {
 		// dimension stuff
 		let width = 0;
 		let height = 0;
-		const marginTop = 5;
-		const marginBottom = 50;
+		const marginTop = 10;
+		const marginBottom = 25;
 		const marginLeft = 25;
 		const marginRight = 10;
 
@@ -66,8 +66,8 @@ d3.selection.prototype.over_time = function init(options) {
 			// on resize, update new dimensions
 			resize() {
 				// defaults to grabbing dimensions from container element
-				width = $sel.node().offsetWidth - marginLeft - marginRight;
-				height = $sel.node().offsetHeight - marginTop - marginBottom;
+				width = $sel.node().offsetWidth - (marginLeft * 2) - (marginRight * 2);
+				height = $sel.node().offsetHeight - (marginTop * 2) - (marginBottom * 2);
 				$svg.at({
 					width: width + marginLeft + marginRight,
 					height: height + marginTop + marginBottom
@@ -109,8 +109,13 @@ d3.selection.prototype.over_time = function init(options) {
 					)
 
 				const xAxis = $axis.append('g.axis-x')
+					.attr('transform', `translate(0, ${height + 5})`)
 					.selectAll('.axis-x-values')
 					.data([15, 'Age', 45])
+
+
+
+				xAxis
 					.enter()
 					.append('text')
 					.attr('class', 'axis-x-values')
@@ -119,10 +124,12 @@ d3.selection.prototype.over_time = function init(options) {
 						let amount = null
 						if (d == 'Age') amount = 30
 						else amount = d
-						return `translate(${scaleX(amount)}, ${height + 10})`
+						return `translate(${scaleX(amount)}, 0)`
 					})
 					.attr('text-anchor', 'middle')
 					.attr('alignment-baseline', 'hanging')
+
+
 
 				const areaGraphic = $vis
 					.append('path')

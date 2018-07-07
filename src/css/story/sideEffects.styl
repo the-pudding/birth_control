@@ -1,34 +1,42 @@
 .sideEffects
 
+
   &-text
 
     .sideEffects
-      background-color $primary
-      padding 0.25rem
-      border-radius 5px
-      color $white
+      color $primary
+      font-weight 600
+      // padding 0.25rem
+      // border-radius 5px
+      // color $white
 
     .weightGain
-      background-color $primary
-      padding 0.25rem
-      border-radius 5px
-      color $white
+      color $primary
+      font-weight 600
+      // padding 0.25rem
+      // border-radius 5px
+      // color $white
 
     .pain
-      background-color $secondary
-      padding 0.25rem
-      border-radius 5px
-      color $white
+      color $secondary
+      font-weight 600
+      // padding 0.25rem
+      // border-radius 5px
+      // color $white
 
     .bleeding
-      background-color darken($quaternary, 5)
-      padding 0.25rem
-      border-radius 5px
-      color $white
+      color darken($quaternary, 5)
+      font-weight 600
+      // padding 0.25rem
+      // border-radius 5px
+      // color $white
 
   .graphic
-    margin 0 auto
     max-width 50rem
+
+    .sideEffects-titles
+      max-width $column-width
+      margin 2rem auto 1rem auto
 
     .container
       display flex
@@ -39,12 +47,12 @@
       .chart-legend
         margin-bottom 0.5rem
         .method-type
-          font-family Atlas Grotesk, sans-serif
+          font-family Atlas Grotesk Web, sans-serif
           font-weight 600
           text-transform uppercase
 
         .method-total
-          font-family Atlas Grotesk, sans-serif
+          font-family Atlas Grotesk Web, sans-serif
           set-type-size('x-small', true)
           color $gray
           text-transform: uppercase;
@@ -56,8 +64,13 @@
       .chart
         width 350px
         margin-bottom 1rem
+        padding 0.5rem
         +mq('bp-4')
           width 375px
+
+        &:hover
+          box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)
+          transition 300ms
 
         .g-vis
           .g-label
@@ -105,6 +118,6 @@
               stroke-dasharray 5px 5px
             text
               set-type-size('xx-small', true)
-              font-family Atlas Grotesk, sans-serif
+              font-family Atlas Grotesk Web, sans-serif
               fill $gray
               text-transform uppercase

@@ -11,7 +11,7 @@
     &-title
       margin 0 0.5rem 0 1rem
       text-transform uppercase
-      font-family Atlas Grotesk, sans-serif
+      font-family Atlas Grotesk Web, sans-serif
       set-type-size('x-small', true)
       width 180px
 
@@ -47,7 +47,7 @@
           margin 0
           set-type-size('x-small', true)
           font-weight 600
-          font-family Atlas Grotesk, sans-serif
+          font-family Atlas Grotesk Web, sans-serif
           color $white
 
 
@@ -63,10 +63,16 @@
 
           .label-text
             fill $white
+            pointer-events: none
 
           .label-text-plus
             fill $off-black !important
             visibility: visible;
+
+          .label-rect
+            &:hover
+              fill $dark !important
+              transition 300ms
 
           &.narrow
 
@@ -83,6 +89,6 @@
           stroke-dasharray 5px 5px
         text
           set-type-size('xx-small', true)
-          font-family Atlas Grotesk, sans-serif
+          font-family Atlas Grotesk Web, sans-serif
           fill $gray
           text-transform uppercase

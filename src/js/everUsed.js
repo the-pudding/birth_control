@@ -36,7 +36,7 @@ const fullNames = [{
   full: 'Standard Days'
 }, {
   short: 'TEMPSAFE',
-  full: 'Sympto-Thermal Method'
+  full: 'Sympto-Thermal'
 }, {
   short: 'VASECTMY',
   full: "Partner's Vasectomy"
