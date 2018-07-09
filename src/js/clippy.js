@@ -122,6 +122,8 @@ function init() {
 
 	dim
 		.on('click', closeInfo)
+
+	clippy.on('click', d => {welcome.classed('active', true)})
 }
 
 export default { init, resize };
