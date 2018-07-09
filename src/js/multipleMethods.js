@@ -16,6 +16,10 @@ const fullNames = [{
   full: 'Condom',
   failure: 18
 }, {
+  short: '5',
+  full: 'Vasectomy',
+  failure: 1
+}, {
   short: '6',
   full: 'Tubal Ligation',
   failure: 0.5
@@ -43,6 +47,14 @@ const fullNames = [{
   short: '20',
   full: 'Emergency',
   failure: 10
+}, {
+  short: '26',
+  full: 'Vaginal Ring',
+  failure: 9
+}, {
+  short: '25',
+  full: 'Patch',
+  failure: 9
 }]
 
 

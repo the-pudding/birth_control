@@ -172,7 +172,7 @@ general_data_1315 <- data_1315 %>%
          num_range("REASPILL0", 1:6),
          num_range("REASCOND0", 1:7),
          num_range("REASDEPO0", 1:8),
-         num_range("REASIUD0", 1:5)
+         num_range("REASIUD0", 1:5),
   )
 ```
 
@@ -308,7 +308,8 @@ cleanData<- function(data, years){
          num_range("REASCOND0", 1:7),
          num_range("REASDEPO0", 1:8),
          num_range("REASIUD0", 1:5), 
-         num_range("METHX", 1:192)
+         num_range("METHX", 1:192),
+         num_range("SIMSEQX", 1:48)
       ) %>%
       mutate(yearRange = years)
 }
@@ -547,12 +548,24 @@ condenseAll <- function(monthNum){
     select(c(!!monthName)) 
 }
 
-usageMap <- map_dfc(monthNumbers, condenseAll) %>% 
+partUsage <- map_dfc(monthNumbers, condenseAll) %>% 
   mutate_all(funs(str_replace_all(., ",NA", ""))) %>% 
   cbind(idsOnly) %>% 
   select("CASEID", month_1:month_48) %>% 
   gather(month, value = "method", month_1:month_48) %>% 
-  mutate(month = gsub("month_", "", month)) %>% 
+  mutate(month = gsub("month_", "", month))
+
+# Keep only months where the respondent used multiple methods at the same time
+sameTime <- allData %>% 
+  select(num_range("SIMSEQX", 1:48), CASEID) %>% 
+  gather(month, value = "time", SIMSEQX1:SIMSEQX48) %>% 
+  mutate(month = gsub("SIMSEQX", "", month))
+
+usageTime <- partUsage %>%
+  left_join(sameTime, by = c("CASEID", "month")) %>% 
+  filter(time == 1)
+
+usageMap <- usageTime %>% 
   group_by(CASEID, method) %>% 
   summarise(count = n()) %>% 
   mutate(prev = lag(method))
@@ -562,7 +575,7 @@ How many different combinations are there?
 ```{r}
 levels(as.factor(usageMap$method))
 ```
-Alright, so there are just over 600 combinations. 
+Alright, so there are just over 300 combinations. 
 
 Let's start with the single usage methods. How long are they typically used? 
 ```{r}
@@ -751,7 +764,7 @@ combo2 <- allNetworkData %>%
   arrange(desc(uniqueR)) %>% 
   ungroup() %>% 
   mutate(row = row_number()) %>% 
-  filter(row <= 10) %>% 
+  filter(row <= 15) %>% 
   select(-row)
 
 write.csv(combo2, "../../src/assets/data/multipleMethods.csv", row.names = FALSE)
