@@ -15,7 +15,10 @@
 
   <div class='sideEffects-text'>
     <h3 class='section-sub'>{{{copy.sideEffects-sub2}}}</h3>
-    <p class='prose'>{{{copy.sideEffects-text2}}}</p>
+    {{#each copy.sideEffects-text2}}
+      <p class='prose'>{{{value}}}</p>
+      {{/each}}
+    <!-- <p class='prose'>{{{copy.sideEffects-text2}}}</p> -->
   </div>
 
   <div class='graphic graphic-sideEffects'>
@@ -27,5 +30,5 @@
     </div>
   </div>
 
-  <p class='prose'>{{{copy.post-sideEffects}}}</p>
+  <!-- <p class='prose'>{{{copy.post-sideEffects}}}</p> -->
 </section>

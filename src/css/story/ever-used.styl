@@ -51,18 +51,20 @@
             background-color $gray-lightest
 
 .firstTime
-  display flex
-  flex-direction column
-  align-items: center
   max-width $column-width
   margin 0 auto 4rem auto
-  +mq('bp-6')
-    flex-direction row
-    align-items: center;
-    justify-content: space-between;
 
-    .graphic-half
-      flex-grow 1.25
+  &-split
+    display flex
+    flex-direction column
+    align-items: center
+    +mq('bp-6')
+      flex-direction row
+      align-items: center;
+      justify-content: space-between;
+
+      .graphic-half
+        flex-grow 1.25
 
   &-text
     padding 0 2.5rem 0 0

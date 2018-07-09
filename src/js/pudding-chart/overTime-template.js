@@ -109,7 +109,7 @@ d3.selection.prototype.over_time = function init(options) {
 					)
 
 				const xAxis = $axis.append('g.axis-x')
-					.attr('transform', `translate(0, ${height + 5})`)
+					.attr('transform', `translate(0, ${height + 2})`)
 					.selectAll('.axis-x-values')
 					.data([15, 'Age', 45])
 
