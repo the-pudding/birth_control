@@ -29,6 +29,13 @@ function handleClick(){
   const sel = d3.select(this)
   const name = sel.at('data-clippy').toLowerCase()
 
+	// Making sure info is scrolled to top
+	const scroll = info.select('.simplebar-scroll-content')
+
+	const node = scroll.node()
+
+	node.scrollTop = 0
+
   const methodNames = ['condom', 'pill', 'withdrawal', 'depo-provera', 'calendar', 'patch', 'vasectomy', 'ring', 'iud', 'thermal', 'standard', 'tubal', 'emergency', 'hormonal implant', 'diaphragm']
 
   const justNames = methodNames.map(d => {

@@ -9,7 +9,7 @@
   bottom 0
   pointer-events: none
   +mq('bp-6')
-    width 70rem
+    width 65rem
   //background-color red
 
   &-character
@@ -46,7 +46,7 @@
 
   &-info
     display flex
-    justify-content: center
+    justify-content: flex-end
     align-items: center
     position absolute
     width 100%
@@ -62,35 +62,54 @@
     background-color: $light-purple
     display flex
     padding 1rem
+    right 5%
     //justify-content center
     align-items flex-start
     flex-direction column
     width 75%
-    max-height 65%
+    max-width 25rem
+    max-height 60%
     overflow hidden
     // top 0
     // left 0
     // transform translate(50%, 50%)
     // background-color: $light-purple
-    border 5px solid $mid-purple
+    border 2px solid $mid-purple
     border-radius 10px
     transition 300ms ease
     opacity 0
     visibility hidden
 
-    &:after
-      content: '';
+    &-arrow
+      border-style: solid;
       position: absolute;
-      bottom: 0;
-      left: 75%;
-      width: 0;
-      height: 0;
-      border: 50px solid transparent;
-      border-top-color: $mid-purple;
-      border-bottom: 0;
-      border-right: 0;
-      margin-left: -10px;
-      margin-bottom: -50px;
+      border-color: $mid-purple transparent transparent transparent;
+      border-width: 8px 8px 0px 8px;
+      bottom: -8px;
+      left: 67px
+
+      &:after
+        border-color: $light-purple transparent transparent transparent;
+        border-style: solid;
+        border-width: 7px 7px 0px 7px;
+        bottom: 1px;
+        content: "";
+        position: absolute;
+        left: -7px;
+
+    // &:after
+    //   content: '';
+    //   position: absolute;
+    //   bottom: 0;
+    //   left: 75%;
+    //   width: 0;
+    //   height: 0;
+    //   border: 50px solid transparent;
+    //   border-top-color: $mid-purple;
+    //   border-bottom: 0;
+    //   border-right: 0;
+    //   margin-left: -10px;
+    //   margin-bottom: -50px;
 
     &.active
       visibility: visible;
@@ -104,7 +123,8 @@
       width 30px
       background-color: $mid-purple
       border: 2px solid $gray-darkest
-      align-self flex-end
+      top 5px
+      left 5px
       border-radius 50%
       position absolute
       display flex
@@ -142,6 +162,7 @@
     .info-prose
       font-family Atlas Grotesk Web, sans-serif
       margin-top 0.25rem
+      margin-right 0.5rem
       set-type-size('small', true)
 
     .link-p
@@ -185,8 +206,10 @@
     padding 0.2rem 1rem
     position absolute;
     visibility hidden
-    right 2%
+    right 1%
     bottom 100px
+    +mq('bp-6')
+      right 2%
     //transition visibility 300ms
 
     &.active
