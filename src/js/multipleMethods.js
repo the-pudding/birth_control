@@ -32,6 +32,10 @@ const fullNames = [{
   full: 'Depo-Provera',
   failure: 6
 }, {
+  short: '9',
+  full: 'Implant',
+  failure: 1
+},{
   short: '10',
   full: 'Calendar Method',
   failure: 24

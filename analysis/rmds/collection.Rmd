@@ -309,7 +309,8 @@ cleanData<- function(data, years){
          num_range("REASDEPO0", 1:8),
          num_range("REASIUD0", 1:5), 
          num_range("METHX", 1:192),
-         num_range("SIMSEQX", 1:48)
+         num_range("SIMSEQX", 1:48),
+         num_range("LSTMTHP", 1:4)
       ) %>%
       mutate(yearRange = years)
 }
@@ -1047,6 +1048,64 @@ facetAge
 
 ggsave(here("plots", "facetAge.svg"), facetAge, device = "svg", width = 10, height = 7)
 
+
+```
+
+## Method used at last sex
+
+To better understand the combinations of methods, we can also look at methods used at the same time during the last sexual experience. 
+
+
+```{r}
+lastSex <- allData %>% 
+  select(num_range("LSTMTHP", 1:4), CASEID)
+
+
+# Keep respondents that used 4 types of birth control
+lastSexNet_4Types <- lastSex %>% filter(!is.na(LSTMTHP4))
+lastSexNet_4Types12 <- lastSexNet_4Types %>% select(-c(LSTMTHP3, LSTMTHP4)) %>% rename(m_a = LSTMTHP1, m_b = LSTMTHP2)
+lastSexNet_4Types34 <- lastSexNet_4Types %>% select(-c(LSTMTHP1, LSTMTHP2)) %>% rename(m_a = LSTMTHP3, m_b = LSTMTHP4)
+lastSexNet_4Types13 <- lastSexNet_4Types %>% select(-c(LSTMTHP2, LSTMTHP4)) %>% rename(m_a = LSTMTHP1, m_b = LSTMTHP3)
+lastSexNet_4Types14 <- lastSexNet_4Types %>% select(-c(LSTMTHP2, LSTMTHP3)) %>% rename(m_a = LSTMTHP1, m_b = LSTMTHP4)
+lastSexNet_4Types23 <- lastSexNet_4Types %>% select(-c(LSTMTHP1, LSTMTHP4)) %>% rename(m_a = LSTMTHP2, m_b = LSTMTHP3)
+lastSexNet_4Types24 <- lastSexNet_4Types %>% select(-c(LSTMTHP1, LSTMTHP3)) %>% rename(m_a = LSTMTHP2, m_b = LSTMTHP4)
+
+lastSexNet_4All <- bind_rows(lastSexNet_4Types12, lastSexNet_4Types34, lastSexNet_4Types13, lastSexNet_4Types14, lastSexNet_4Types23, lastSexNet_4Types24)
+
+# Limit to people that have used 3 types
+lastSexNet_3Types <- lastSex %>% filter(!is.na(LSTMTHP3) & is.na(LSTMTHP4))
+lastSexNet_3Types12 <- lastSexNet_3Types %>% select(-c(LSTMTHP3, LSTMTHP4)) %>% rename(m_a = LSTMTHP1, m_b = LSTMTHP2)
+lastSexNet_3Types13 <- lastSexNet_3Types %>% select(-c(LSTMTHP2, LSTMTHP4)) %>% rename(m_a = LSTMTHP1, m_b = LSTMTHP3)
+lastSexNet_3Types23 <- lastSexNet_3Types %>% select(-c(LSTMTHP1, LSTMTHP4)) %>% rename(m_a = LSTMTHP2, m_b = LSTMTHP3)
+
+lastSexNet_3All <- bind_rows(lastSexNet_3Types12, lastSexNet_3Types13, lastSexNet_4Types23)
+
+# Limit to people that have used 2 types
+lastSexNet_2Types <- lastSex %>% filter(!is.na(LSTMTHP2) & is.na(LSTMTHP3) & is.na(LSTMTHP4))
+lastSexNet_2Types12 <- lastSexNet_2Types %>% select(-c(LSTMTHP3, LSTMTHP4)) %>% rename(m_a = LSTMTHP1, m_b = LSTMTHP2)
+
+# Limit to people that have used 1 type
+lastSexNet_1Type <- lastSex %>% filter(is.na(LSTMTHP2) & is.na(LSTMTHP3) & is.na(LSTMTHP4)) %>% select(-c(LSTMTHP3, LSTMTHP4)) %>% rename(m_a = LSTMTHP1, m_b = LSTMTHP2)
+
+alllastSexNet <- bind_rows(lastSexNet_4All, lastSexNet_3All, lastSexNet_2Types12)
+
+lastSexCombo <- alllastSexNet %>% 
+  group_by(m_a, m_b) %>% 
+  summarise(uniqueR = n_distinct(CASEID)) %>% 
+  arrange(desc(uniqueR)) %>% 
+  ungroup() %>% 
+  mutate(row = row_number())
+
+lastSexCombo2 <- alllastSexNet %>% 
+  group_by(m1 = pmin(m_a, m_b), m2 = pmax(m_a, m_b)) %>% 
+  summarise(uniqueR = n_distinct(CASEID)) %>% 
+  arrange(desc(uniqueR)) %>% 
+  ungroup() %>% 
+  mutate(row = row_number()) %>% 
+  filter(row <= 15) %>% 
+  select(-row)
+
+#write.csv(lastSexCombo2, "../../src/assets/data/multipleMethods.csv", row.names = FALSE)
 
 ```
 
