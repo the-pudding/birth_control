@@ -7,6 +7,7 @@ const info = d3.select('.info-container')
 const dim = d3.select('.clippy-dim')
 const close = d3.select('.close-info')
 const welcome = d3.select('.clippy-speech')
+const arrow = d3.select('.info-container-arrow')
 
 let copy = null
 
@@ -77,6 +78,12 @@ function handleClick(){
 
   dim
     .classed('active', true)
+
+	close
+		.classed('active', true)
+
+	arrow
+		.classed('active', true)
 }
 
 function closeInfo(){
@@ -88,6 +95,12 @@ function closeInfo(){
 
   dim
     .classed('active', false)
+
+	close
+		.classed('active', false)
+
+	arrow
+		.classed('active', false)
 }
 
 function init() {
@@ -106,6 +119,9 @@ function init() {
     .on('click', d => {
       welcome.classed('active', false)
     })
+
+	dim
+		.on('click', closeInfo)
 }
 
 export default { init, resize };
