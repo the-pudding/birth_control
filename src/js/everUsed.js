@@ -43,6 +43,9 @@ const fullNames = [{
 }, {
   short: 'WIDRAWAL',
   full: "Withdrawal"
+}, {
+  short: 'STRLOPER',
+  full: "Tubal Ligation"
 }]
 
 function titleSpin(){

@@ -146,13 +146,13 @@ Here are the ones I'll be keeping:
 * **BC12PAYX7 - BC12PAYX9**: Way bill was paid - method birth control/prescription - 1st through 4th methods
 * **BC12PAYX10 - BC12PAYX16**: Way bill was paid - check up for birth control - 1st through 4th methods
 * **BC12PAYX19 - BC12PAYX22**: Way bill was paid - counseling about birth control - 1st through 4th methods
-
+* **STRLOPER**: Type of sterlization operation "in effect" at time of interview
 
 ## Cleaning Data
 
 I'll create a character vector of all of the column names that don't have repeats so that I can trim to just the columns that I need. Any of the column names that have numeric repeats (e.g., `METHSTOP01`, `METHSTOP02`) can be specified using the `num_range()` function inside of `select()` from `dplyr`.
 ```{r}
-general_ques <- c("CASEID", "AGE_R", "MARSTAT", "PREGNOWQ", "RHADSEX", "SEDBC", "SEDSTD", "SEDABST", "LIFEPRTS", "HYST", "OVAREM", "OTHR", "VASECT", "POSIBLPG", "POSIBLMN", "PILL", "CONDOM", "VASECTMY", "DEPOPROV", "WIDRAWAL", "RHYTHM", "SDAYCBDS", "TEMPSAFE", "PATCH", "RING", "MORNPILL", "ECTIMESX", "EVERUSED", "JINTEND", "JSUREINT", "INTEND", "JSUREINT", "INTEND", "SUREINT", "REACTSLF", "LESSPLSR", "EMBARRAS", "ORIENT", "CONFCONC", "BTHCON12", "MEDTST12", "WNFSTUSE_Y")
+general_ques <- c("CASEID", "AGE_R", "MARSTAT", "PREGNOWQ", "RHADSEX", "SEDBC", "SEDSTD", "SEDABST", "LIFEPRTS", "HYST", "OVAREM", "OTHR", "VASECT", "POSIBLPG", "POSIBLMN", "PILL", "CONDOM", "VASECTMY", "DEPOPROV", "WIDRAWAL", "RHYTHM", "SDAYCBDS", "TEMPSAFE", "PATCH", "RING", "MORNPILL", "ECTIMESX", "EVERUSED", "JINTEND", "JSUREINT", "INTEND", "JSUREINT", "INTEND", "SUREINT", "REACTSLF", "LESSPLSR", "EMBARRAS", "ORIENT", "CONFCONC", "BTHCON12", "MEDTST12", "WNFSTUSE_Y", "STRLOPER")
 ```
 
 ```{r eval = FALSE}
@@ -315,7 +315,7 @@ cleanData<- function(data, years){
 ```
 
 ```{r eval = FALSE}
-general_ques <- c("CASEID", "AGE_R", "MARSTAT", "PREGNOWQ", "RHADSEX", "SEDBC", "SEDSTD", "SEDABST", "LIFEPRTS", "HYST", "OVAREM", "OTHR", "VASECT", "POSIBLPG", "POSIBLMN", "PILL", "CONDOM", "VASECTMY", "DEPOPROV", "WIDRAWAL", "RHYTHM", "SDAYCBDS", "TEMPSAFE", "PATCH", "RING", "MORNPILL", "ECTIMESX", "EVERUSED", "JINTEND", "JSUREINT", "INTEND", "JSUREINT", "INTEND", "SUREINT", "REACTSLF", "LESSPLSR", "EMBARRAS", "ORIENT", "CONFCONC", "BTHCON12", "MEDTST12", "WNFSTUSE_Y")
+general_ques <- c("CASEID", "AGE_R", "MARSTAT", "PREGNOWQ", "RHADSEX", "SEDBC", "SEDSTD", "SEDABST", "LIFEPRTS", "HYST", "OVAREM", "OTHR", "VASECT", "POSIBLPG", "POSIBLMN", "PILL", "CONDOM", "VASECTMY", "DEPOPROV", "WIDRAWAL", "RHYTHM", "SDAYCBDS", "TEMPSAFE", "PATCH", "RING", "MORNPILL", "ECTIMESX", "EVERUSED", "JINTEND", "JSUREINT", "INTEND", "JSUREINT", "INTEND", "SUREINT", "REACTSLF", "LESSPLSR", "EMBARRAS", "ORIENT", "CONFCONC", "BTHCON12", "MEDTST12", "WNFSTUSE_Y", "STRLOPER")
 
 clean_0610 <- cleanData(data_0610, "0610")
 clean_1113 <- cleanData(data_1113, "1113")
@@ -404,10 +404,11 @@ allData %>%
 Alright, so 88% of respondents have used some form of contraception. Let's limit our sample to just those 20,759 people. 
 
 ```{r}
-possibleTypes <- c("CONDOM", "VASECTMY", "DEPOPROV", "WIDRAWAL", "RHYTHM", "SDAYCBDS", "TEMPSAFE", "PATCH", "PILL", "RING", "MORNPILL", "EVIUDTYP1", "EVIUDTYP2")
+possibleTypes <- c("CONDOM", "VASECTMY", "DEPOPROV", "WIDRAWAL", "RHYTHM", "SDAYCBDS", "TEMPSAFE", "PATCH", "PILL", "RING", "MORNPILL", "EVIUDTYP1", "EVIUDTYP2", "STRLOPER")
 
 IUDTypes <- c(1, 2, 3, 9)
 IUDMethods <- c("EVIUDTYP1", "EVIUDTYP2")
+tubalMethods <- "STRLOPER"
 
 `%not_in%` <- negate(`%in%`)
 
@@ -418,9 +419,11 @@ typeUsed <- allData %>%
   mutate(usage = case_when(
     method %in% IUDMethods & (usage %in% IUDTypes) ~ "Yes",
     method %in% IUDMethods & usage %not_in% IUDTypes ~ "No",
-    method %not_in% IUDMethods & usage == 1 ~ "Yes",
-    method %not_in% IUDMethods & usage == 5 ~ "No",
-    method %not_in% IUDMethods & usage != 1 & usage != 5 ~ "NA"
+    method %in% tubalMethods & usage == 1 ~ "Yes",
+    method %in% tubalMethods & usage > 1 ~ "No",
+    method %not_in% IUDMethods & method %not_in% tubalMethods & usage == 1 ~ "Yes",
+    method %not_in% IUDMethods & method %not_in% tubalMethods & usage == 5 ~ "No",
+    method %not_in% IUDMethods & method %not_in% tubalMethods & usage != 1 & usage != 5 ~ "NA"
   )) %>% 
   # mutate(usage = ifelse(usage == 1, "Yes", 
   #                          ifelse(usage == 5, "No", NA))) %>% 
