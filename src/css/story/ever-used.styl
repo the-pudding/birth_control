@@ -14,10 +14,12 @@
       display flex
       flex-direction column
       align-items: center
-      margin 0.5rem 0rem
-      width 130px
       transition 300ms
       padding 0.5rem
+      width 120px
+      +mq('bp-4')
+        margin 0.5rem 0rem
+        width 130px
 
       &:hover
         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)
@@ -144,11 +146,14 @@
     justify-content: flex-start;
 
     .chart
-      width 170px
+      width 160px
       height 125px
-      margin 1rem
+      margin 0.5rem
       transition 300ms
       padding 0.5rem
+      +mq('bp-4')
+        width 170px
+        margin 1rem
 
       &:hover
         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)
