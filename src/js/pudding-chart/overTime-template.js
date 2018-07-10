@@ -78,7 +78,7 @@ d3.selection.prototype.over_time = function init(options) {
 					.rangeRound([0, width])
 
 				scaleY
-					.domain([0, 31])
+					.domain([0, 40])
 					.rangeRound([height, 0])
 
 				return Chart;

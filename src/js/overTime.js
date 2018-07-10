@@ -9,46 +9,46 @@ const $overTime = d3.selectAll('.container-over_time')
 
 
 const fullNames = [{
-  short: '3',
+  short: '6',
   full: 'The Pill'
 }, {
-  short: '4',
+  short: '12',
   full: 'Condom'
 }, {
-  short: '5',
+  short: '2',
   full: "Partner's Vasectomy"
 }, {
-  short: '6',
+  short: '1',
   full: 'Tubal Ligation'
 }, {
-  short: '7',
+  short: '21',
   full: 'Withdrawal'
 }, {
-  short: '8',
+  short: '5',
   full: 'Depo-Provera'
 }, {
-  short: '9',
+  short: '3',
   full: 'Hormonal Implant'
 }, {
-  short: '10',
+  short: '20',
   full: 'Calendar Method'
 }, {
-  short: '11',
+  short: '19',
   full: 'Sympto-Thermal'
 }, {
-  short: '12',
+  short: '11',
   full: 'Diaphragm'
 }, {
-  short: '19',
+  short: '10',
   full: "IUD"
 }, {
-  short: '20',
+  short: '9',
   full: 'Emergency'
 }, {
-  short: '25',
+  short: '7',
   full: 'Patch'
 }, {
-  short: '26',
+  short: '8',
   full: 'Vaginal Ring'
 }]
 
