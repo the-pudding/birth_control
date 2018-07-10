@@ -310,7 +310,8 @@ cleanData<- function(data, years){
          num_range("REASIUD0", 1:5), 
          num_range("METHX", 1:192),
          num_range("SIMSEQX", 1:48),
-         num_range("LSTMTHP", 1:4)
+         num_range("LSTMTHP", 1:4),
+         num_range("CONSTAT", 1:4)
       ) %>%
       mutate(yearRange = years)
 }
@@ -1039,7 +1040,7 @@ fullAge <- methodAge %>%
   filter(!method %in% toRemove) %>% 
   filter(!is.na(calcAge))
 
-write.csv(fullAge, "../../src/assets/data/overTime.csv", row.names = FALSE)
+#write.csv(fullAge, "../../src/assets/data/overTime.csv", row.names = FALSE)
   
 
 facetAge <- ggplot(fullAge, aes(x = calcAge, y = percent, group = method, color = method)) + geom_line() + geom_area() + facet_wrap(~method)
@@ -1050,6 +1051,43 @@ ggsave(here("plots", "facetAge.svg"), facetAge, device = "svg", width = 10, heig
 
 
 ```
+
+Based on the way the METHX variable was reported, this method of calculation may lead to over-weighting long acting reversible methods (IUD, implants, etc.) which can continue to be used when the user is not sexually active and underweighting coital-dependent methods (like condoms). Let's try this calculation again using the CONSTAT variable (reporting the methods that the user is using at the time of surveying).
+
+```{r}
+ageCurrent <- allData %>% 
+  select(num_range("CONSTAT", 1:4), one_of(ageVar)) %>% 
+  filter(EVERUSED == 1) %>% 
+  select(-EVERUSED) %>% 
+  gather(variable, method, c("CONSTAT1":"CONSTAT4")) %>% 
+  filter(method != 88) %>% 
+  group_by(method, AGE_R) %>% 
+  summarise(methodR = n_distinct(CASEID))
+
+fullAgeCurrent <- allData %>% 
+  select(one_of(ageVar)) %>% 
+  filter(EVERUSED == 1) %>% 
+  select(-EVERUSED) %>% 
+  group_by(AGE_R) %>% 
+  summarise(total = n())
+
+currentRemove <- c(4, 13, 14, 16, 17, 18, 22, 30, 31, 32, 33, 34, 35, 36, 38, 40, 41, 42)
+
+totalAgeCurrent <- ageCurrent %>% 
+  left_join(fullAgeCurrent, by = "AGE_R") %>% 
+  mutate(percent = (methodR / total) * 100) %>% 
+  #filter(total > 1000) %>% 
+  filter(!method %in% currentRemove) %>% 
+  mutate(calcAge = AGE_R) %>% 
+  select(-AGE_R) %>% 
+  filter(total >= 100)
+
+ggplot(totalAgeCurrent, aes(x = AGE_R, y = percent, group = method, color = method)) + geom_line() + geom_area() + facet_wrap(~method)
+
+write.csv(totalAgeCurrent, "../../src/assets/data/overTime.csv", row.names = FALSE)
+```
+
+
 
 ## Method used at last sex
 
