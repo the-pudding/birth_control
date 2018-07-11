@@ -1,16 +1,16 @@
 {
-	"title": "Title Case Headline Goes Here",
+	"title": "Let's Talk About Birth Control",
 	"description":
-		"Your dek goes here. It is probably one or two sentences that succinctly describe more explicitly what the story will be about.",
-	"url": "https://pudding.cool/year/month/name/",
+		"There’s no TMI here, just 20,759 people describing their experiences with contraception.",
+	"url": "https://pudding.cool/2018/07/birth_control/",
 	"keywords": "tk",
 	"imgFacebook":
-		"https://pudding.cool/year/month/name/assets/social/social-facebook.jpg",
+		"https://pudding.cool/2018/07/birth_control/assets/social/social-facebook.jpg",
 	"imgTwitter":
-		"https://pudding.cool/year/month/name/assets/social/social-twitter.jpg",
+		"https://pudding.cool/2018/07/birth_control/assets/social/social-twitter.jpg",
 	"author": {
-		"name": "Author Name",
-		"url": "https://twitter.com/puddingviz",
-		"twitterHandle": "@puddingviz"
+		"name": "Amber Thomas",
+		"url": "https://twitter.com/proquesasker",
+		"twitterHandle": "@proquesasker"
 	}
 }
