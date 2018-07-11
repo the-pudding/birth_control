@@ -37,7 +37,7 @@ function handleClick(){
 
 	node.scrollTop = 0
 
-  const methodNames = ['condom', 'pill', 'withdrawal', 'depo-provera', 'calendar', 'patch', 'vasectomy', 'ring', 'iud', 'thermal', 'standard', 'tubal', 'emergency', 'hormonal implant', 'diaphragm']
+  const methodNames = ['condom', 'pill', 'withdrawal', 'depo-provera', 'calendar', 'patch', 'vasectomy', 'ring', 'iud', 'thermal', 'standard', 'tubal', 'emergency', 'implant', 'diaphragm']
 
   const justNames = methodNames.map(d => {
     const incl = name.includes(d)
@@ -47,13 +47,15 @@ function handleClick(){
 
   const details = copy[`${justNames.name}`]
 
+	console.log({methodNames, justNames, details})
+
   welcome.classed('active', false)
 
   info
     .classed('active', true)
 
   info.select('.info-title')
-    .text(name)
+    .text(details.name)
 
   info.select('.info-def')
     .text(details.definition)
