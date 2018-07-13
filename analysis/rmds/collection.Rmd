@@ -329,6 +329,8 @@ allData <- bind_rows(clean_0610, clean_1113, clean_1315)
 
 ```{r eval = FALSE, echo = FALSE}
 saveRDS(allData, here("raw_data", "data_0615.rds"))
+
+write.csv(allData, here("open_data", "allData.csv"), row.names = FALSE)
 ```
 
 ```{r echo = FALSE}
@@ -579,8 +581,7 @@ levels(as.factor(usageMap$method))
 ```
 Alright, so there are just over 300 combinations. 
 
-Let's start with the single usage methods. How long are they typically used? 
-```{r}
+```{r echo = FALSE, eval = FALSE}
 singleMethods <- usageMap %>% 
   filter(!str_detect(method, ","),
          !method == "NA") %>% 
@@ -1082,7 +1083,7 @@ totalAgeCurrent <- ageCurrent %>%
   select(-AGE_R) %>% 
   filter(total >= 100)
 
-ggplot(totalAgeCurrent, aes(x = AGE_R, y = percent, group = method, color = method)) + geom_line() + geom_area() + facet_wrap(~method)
+ggplot(totalAgeCurrent, aes(x = calcAge, y = percent, group = method, color = method)) + geom_line() + geom_area() + facet_wrap(~method)
 
 write.csv(totalAgeCurrent, "../../src/assets/data/overTime.csv", row.names = FALSE)
 ```
@@ -1145,5 +1146,10 @@ lastSexCombo2 <- alllastSexNet %>%
 
 #write.csv(lastSexCombo2, "../../src/assets/data/multipleMethods.csv", row.names = FALSE)
 
+```
+
+The following contains all of my session info for this code: 
+```{r session_info, include=TRUE, echo=TRUE, results='markup'}
+devtools::session_info()
 ```
 
