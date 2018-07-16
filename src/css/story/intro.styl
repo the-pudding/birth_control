@@ -10,10 +10,12 @@
 		font-weight 400
 		text-align center
 		set-type-size('xx-large', true)
+		height 15rem
 		+mq('bp-3')
 			set-type-size('xxx-large', true)
 		+mq('bp-5')
 			set-type-size('xxxx-large', true)
+			height auto
 
 		#titleMethod
 			display inline-block
@@ -22,7 +24,9 @@
 			padding 0.5rem 1rem
 			border-radius 10px
 			color $white
-			set-type-size('xxx-large', true)
+			set-type-size('x-large', true)
+			+mq('bp-5')
+				set-type-size('xxx-large', true)
 
 	&__byline
 		max-width $column-width
